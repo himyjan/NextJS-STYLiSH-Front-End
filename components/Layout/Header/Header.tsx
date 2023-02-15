@@ -19,7 +19,7 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky w-screen">
+    <header className="sticky top-0 w-screen z-50 bg-white">
       <div className="w-full">
         <div
           className="w-full flex justify-center items-center h-[52px]"

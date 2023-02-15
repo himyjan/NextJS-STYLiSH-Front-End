@@ -1,20 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap");
 
-:root {
+@layer bsae {
   * {
     box-sizing: border-box;
   }
   body {
     font-family: "Noto Sans TC", sans-serif;
   }
-  #root {
+
+  #__next {
     min-height: 100vh;
-    padding: 140px 0 115px;
     position: relative;
-    @media screen and (max-width: 1279px) {
-      padding: 102px 0 208px;
-    }
   }
 }
