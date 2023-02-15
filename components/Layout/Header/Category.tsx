@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 interface Category {
   hasNext: boolean;
@@ -13,8 +12,6 @@ const CATEGORY_CLASS_NAME =
   "h-[50px] flex justify-center items-center flex-1 text-center bg-dark-grey font-norma text-[20px] hover:text-white cursor-pointer";
 
 const Category = ({ hasNext, id, curCategory, onClick, text }: Category) => {
-  const router = useRouter();
-
   if (hasNext) {
     return (
       <>
@@ -30,7 +27,7 @@ const Category = ({ hasNext, id, curCategory, onClick, text }: Category) => {
         >
           <Link
             href={{
-              pathname: router.pathname,
+              pathname: "/",
               query: { category: id },
             }}
             style={{ width: "100%" }}
@@ -55,7 +52,7 @@ const Category = ({ hasNext, id, curCategory, onClick, text }: Category) => {
     >
       <Link
         href={{
-          pathname: router.pathname,
+          pathname: "/",
           query: { category: id },
         }}
         style={{ width: "100%" }}

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { useState } from "react";
 import LogoImage from "../../../assets/images/logo.png";
@@ -20,9 +21,16 @@ const Header = () => {
   return (
     <header className="sticky w-screen">
       <div className="w-full">
-        <div className="w-full flex justify-center items-center h-[52px]">
+        <div
+          className="w-full flex justify-center items-center h-[52px]"
+          onClick={() => {
+            categoryHandler("all");
+          }}
+        >
           <div className="mx-auto w-[129px] h-[24px]">
-            <Image className="w-fill" src={LogoImage} alt="STYLiSH Logo" />
+            <Link href={{ pathname: "/" }}>
+              <Image className="w-fill" src={LogoImage} alt="STYLiSH Logo" />
+            </Link>
           </div>
         </div>
         <div className="w-full flex justify-center items-center h-[50px] bg-dark-grey">
