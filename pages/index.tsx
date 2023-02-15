@@ -1,4 +1,5 @@
 import Carousel from "@/components/Carousel/Carousel";
+import Products from "@/components/Products/Products";
 import Head from "next/head";
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Carousel />
+      <Products />
     </>
   );
 }

@@ -64,10 +64,8 @@ const Carousel = () => {
     };
   }, [carouselData, isPlaying]);
 
-  console.log(activeIndex);
-
   return (
-    <div className="w-full h-[185px] bg-light-grey relative">
+    <div className="w-full h-[185px] bg-grey relative">
       {carouselData?.map((item) => {
         return (
           <Link

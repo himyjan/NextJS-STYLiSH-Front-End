@@ -29,7 +29,12 @@ const Header = () => {
         >
           <div className="mx-auto w-[129px] h-[24px]">
             <Link href={{ pathname: "/" }}>
-              <Image className="w-fill" src={LogoImage} alt="STYLiSH Logo" />
+              <Image
+                className="w-fill"
+                priority
+                src={LogoImage}
+                alt="STYLiSH Logo"
+              />
             </Link>
           </div>
         </div>

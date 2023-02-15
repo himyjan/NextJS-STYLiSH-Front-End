@@ -19,7 +19,7 @@ const Category = ({ hasNext, id, curCategory, onClick, text }: Category) => {
           className={
             id === curCategory
               ? `${CATEGORY_CLASS_NAME} text-white`
-              : `${CATEGORY_CLASS_NAME} text-light-grey`
+              : `${CATEGORY_CLASS_NAME} text-grey`
           }
           id={id}
           onClick={onClick}
@@ -35,7 +35,7 @@ const Category = ({ hasNext, id, curCategory, onClick, text }: Category) => {
             {text}
           </Link>
         </div>
-        <div className="h-[20px] border-l border-light-grey" />
+        <div className="h-[20px] border-l border-grey" />
       </>
     );
   }
@@ -44,7 +44,7 @@ const Category = ({ hasNext, id, curCategory, onClick, text }: Category) => {
       className={
         id === curCategory
           ? `${CATEGORY_CLASS_NAME} text-white`
-          : `${CATEGORY_CLASS_NAME} text-light-grey`
+          : `${CATEGORY_CLASS_NAME} text-grey`
       }
       id={id}
       onClick={onClick}
