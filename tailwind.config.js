@@ -37,6 +37,9 @@ module.exports = {
     letterSpacing: {
       "product-text-sm": "0.15rem",
     },
+    backgroundImage: {
+      "loading-spinner": "url('../assets/images/loading.gif')",
+    },
     extend: {},
   },
   plugins: [],

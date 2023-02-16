@@ -74,11 +74,20 @@ const Products = () => {
   }, [category, fetchProductsHandler]);
 
   return (
-    <div className="flex flex-wrap gap-x-img-container-gap-sm justify-between mx-auto -mb-img-container-mb-sm px-img-container-px-sm pt-img-container-pt-sm pb-img-container-pb-sm">
-      {productData?.map((product) => {
-        return <ProductCard key={`product-${product.id}`} data={product} />;
-      })}
-      <div className="w-full" ref={containerRef} />
+    <div className="flex flex-col items-center mx-auto -mb-img-container-mb-sm px-img-container-px-sm pt-img-container-pt-sm pb-img-container-pb-sm relative">
+      <div className="flex flex-wrap gap-x-img-container-gap-sm justify-between">
+        {productData?.map((product) => {
+          return <ProductCard key={`product-${product.id}`} data={product} />;
+        })}
+      </div>
+      <div
+        className={
+          isLoading
+            ? "h-[40px] w-[40px] bg-loading-spinner bg-no-repeat bg-center bg-cover my-[20px]"
+            : ""
+        }
+        ref={containerRef}
+      />
     </div>
   );
 };
