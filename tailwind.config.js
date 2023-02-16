@@ -32,6 +32,7 @@ module.exports = {
     padding: {
       "img-container-pt-sm": "max(15px,calc(100vw/1280*50))",
       "img-container-pb-sm": "max(30px,calc(100vw/1280*96))",
+      "img-container-px-sm": "max(24px,calc(100vw/1280*60))",
     },
     letterSpacing: {
       "product-text-sm": "0.15rem",

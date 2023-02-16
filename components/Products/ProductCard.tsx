@@ -1,13 +1,15 @@
 import { ProductData } from "@/types/types";
 import Image from "next/image";
+import Link from "next/link";
 
 const ProductCard = ({ data }: { data: ProductData }) => {
-  console.log(data);
   return (
-    <div className="w-img-w-sm flex-shrink-0 flex flex-col h-fit">
-      <div className="w-full h-img-h-sm overflow-hidden relative">
-        <Image fill sizes="100%" src={data.main_image} alt={data.title} />
-      </div>
+    <div className="w-img-w-sm flex-shrink-0 flex flex-col h-fit relative">
+      <Link href={`/product/${data.id}`}>
+        <div className="w-full h-img-h-sm overflow-hidden relative">
+          <Image fill sizes="100%" src={data.main_image} alt={data.title} />
+        </div>
+      </Link>
       <div className="flex pt-[10px] gap-x-[6px]">
         {data.colors.length > 0 &&
           data.colors.map((color) => {
