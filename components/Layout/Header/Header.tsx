@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LogoImage from "../../../assets/images/logo.png";
 import Category from "./Category";
 
@@ -13,10 +14,21 @@ export const CATEGORY_DATA = [
 
 const Header = () => {
   const [curCategory, setCurCategory] = useState("all");
+  const router = useRouter();
 
   const categoryHandler = (category: string) => {
     setCurCategory(category);
   };
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    if (
+      typeof router.query.category !== "string" &&
+      typeof router.query.category !== "undefined"
+    )
+      return;
+    setCurCategory(router.query.category || "all");
+  }, [router.isReady, router.query.category]);
 
   return (
     <header className="sticky top-0 w-screen z-50 bg-white">
