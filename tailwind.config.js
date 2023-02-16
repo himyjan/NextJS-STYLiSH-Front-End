@@ -39,6 +39,12 @@ module.exports = {
     },
     backgroundImage: {
       "loading-spinner": "url('../assets/images/loading.gif')",
+      cart: "url('../assets/images/cart.png')",
+      "cart-mobile": "url('../assets/images/cart-mobile.png')",
+      "cart-hover": "url('../assets/images/cart-hover.png')",
+      member: "url('../assets/images/member.png')",
+      "member-mobile": "url('../assets/images/member-mobile.png')",
+      "member-hover": "url('../assets/images/member-hover.png')",
     },
     extend: {},
   },

@@ -74,7 +74,7 @@ const Products = () => {
   }, [category, fetchProductsHandler]);
 
   return (
-    <div className="flex flex-col items-center mx-auto -mb-img-container-mb-sm px-img-container-px-sm pt-img-container-pt-sm pb-img-container-pb-sm relative">
+    <div className="flex flex-col items-center mx-auto mb-[60px] px-img-container-px-sm pt-img-container-pt-sm pb-img-container-pb-sm relative">
       <div className="flex flex-wrap gap-x-img-container-gap-sm justify-between">
         {productData?.map((product) => {
           return <ProductCard key={`product-${product.id}`} data={product} />;

@@ -66,7 +66,28 @@ const Header = () => {
             );
           })}
         </div>
-        <div></div>
+        <div className="flex justify-center items-center absolute w-full top-[calc(100vh-60px)] h-[60px] bg-dark-grey">
+          <Link href="/checkout">
+            <div className="flex justify-center items-center w-[calc((100vw-1px)/2)] cursor-pointer relative group">
+              <div className="h-[24px] w-[24px] rounded-full text-center text-light-grey absolute bottom-0 -ml-[24px] bg-brown">
+                1
+              </div>
+              <div className="bg-cart-mobile w-[44px] h-[44px] bg-no-repeat bg-center bg-cover group-hover:bg-cart-hover" />
+              <div className="text-base leading-4 text-grey group-hover:text-brown">
+                購物車
+              </div>
+            </div>
+          </Link>
+          <div className="border-l border-grey h-[24px]" />
+          <Link href="/member">
+            <div className="flex justify-center items-center w-[calc((100vw-1px)/2)] cursor-pointer relative group">
+              <div className="bg-member-mobile w-[44px] h-[44px] bg-no-repeat bg-center bg-cover group-hover:bg-member-hover" />
+              <div className="text-base leading-4 text-grey group-hover:text-brown">
+                會員
+              </div>
+            </div>
+          </Link>
+        </div>
       </div>
     </header>
   );
