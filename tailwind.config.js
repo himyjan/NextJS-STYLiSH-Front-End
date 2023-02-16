@@ -22,6 +22,7 @@ module.exports = {
     },
     height: {
       "img-h-sm": "max(204px,calc(40vw/153*204))",
+      "img-product-h-sm": "min(1290.667px,calc(100vw/360*480))",
     },
     gap: {
       "img-container-gap-sm": "clamp(6px,calc(100%/360*6),calc(6/360*1160px))",
