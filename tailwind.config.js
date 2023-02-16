@@ -13,8 +13,10 @@ module.exports = {
       "dark-grey": "#313538",
       grey: "#828282",
       "light-grey": "#D3D3D3",
+      "light-grey-2": "#BABABA",
       white: "#FFFFFF",
       brown: "#8B572A",
+      "light-black": "#3F3A3A",
     },
     width: {
       full: "100%",
@@ -37,6 +39,8 @@ module.exports = {
     },
     letterSpacing: {
       "product-text-sm": "0.15rem",
+      "product-title-sm": "0.25rem",
+      "product-id-sm": "0.2rem",
     },
     backgroundImage: {
       "loading-spinner": "url('../assets/images/loading.gif')",
