@@ -25,9 +25,13 @@ const ProductVariants = ({
     quantity: 0,
     curStock: 0,
   });
+  const [curStocksOfCurColor, setCurStocksOfCurColor] = useState<Variants[]>(
+    []
+  );
   //   console.log(variants);
   //   console.log(colors);
-  console.log(selectedVariants);
+  //   console.log(selectedVariants);
+  //   console.log(curStocksOfCurColor);
 
   const curStockHandler = useCallback(
     (colorCode: string, size: string) => {
@@ -49,6 +53,17 @@ const ProductVariants = ({
     return curQuantity;
   };
 
+  const curStocksOfCurColorHandler = useCallback(
+    (colorCode: string) => {
+      const newVariants = variants.filter(
+        (item) => item.color_code === colorCode
+      );
+
+      setCurStocksOfCurColor(newVariants);
+    },
+    [variants]
+  );
+
   const selectColorHandler = (color: Colors) => {
     const curStock = curStockHandler(color.code, selectedVariants.selectedSize);
     const quantity = quantityHandler(selectedVariants.quantity, curStock);
@@ -62,6 +77,7 @@ const ProductVariants = ({
     };
 
     setSelectedVariants(newVariants);
+    curStocksOfCurColorHandler(color.code);
   };
 
   const selectSizeHandler = (size: string) => {
@@ -120,10 +136,11 @@ const ProductVariants = ({
         };
 
         setSelectedVariants(newVariants);
+        curStocksOfCurColorHandler(colors[0].code);
       };
       initHandler();
     }
-  }, [colors, curStockHandler, sizes, variants]);
+  }, [colors, curStockHandler, curStocksOfCurColorHandler, sizes, variants]);
 
   return (
     <div className="flex flex-col mb-[28px]">
@@ -147,14 +164,15 @@ const ProductVariants = ({
         <div className="text-[14px] leading-[17px] tracking-product-var-sm pr-[8px] border-r border-light-black">
           尺寸
         </div>
-        {sizes?.length > 0 &&
-          sizes?.map((item) => {
+        {curStocksOfCurColor?.length > 0 &&
+          curStocksOfCurColor?.map((item) => {
             return (
               <SizeButton
-                key={`size-${item}`}
-                size={item}
+                key={`size-${item.size}`}
+                size={item.size}
                 selectedSize={selectedVariants.selectedSize}
                 selectSizeHandler={selectSizeHandler}
+                isValid={item.stock >= 1}
               />
             );
           })}
