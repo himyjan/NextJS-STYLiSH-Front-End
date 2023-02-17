@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 import { useEffect, useState } from "react";
-import LogoImage from "../../../assets/images/logo.png";
+import LogoImage from "@/assets/images/logo.png";
 import Category from "./Category";
 
 export const CATEGORY_DATA = [
@@ -15,6 +16,7 @@ export const CATEGORY_DATA = [
 const Header = () => {
   const [curCategory, setCurCategory] = useState("all");
   const router = useRouter();
+  const cart = useSelector((state: RootState) => state.cart);
 
   const categoryHandler = (category: string) => {
     setCurCategory(category);
@@ -58,9 +60,7 @@ const Header = () => {
                 hasNext={index === arr.length - 1 ? false : true}
                 id={item.id}
                 curCategory={curCategory}
-                onClick={() => {
-                  categoryHandler(item.id);
-                }}
+                onClick={categoryHandler}
                 text={item.text}
               />
             );
@@ -70,7 +70,7 @@ const Header = () => {
           <Link href="/checkout">
             <div className="flex justify-center items-center w-[calc((100vw-1px)/2)] cursor-pointer relative group">
               <div className="h-[24px] w-[24px] rounded-full text-center text-light-grey absolute bottom-0 -ml-[24px] bg-brown">
-                1
+                {cart.totalQuantity > 99 ? "99+" : cart.totalQuantity}
               </div>
               <div className="bg-cart-mobile w-[44px] h-[44px] bg-no-repeat bg-center bg-cover group-hover:bg-cart-hover" />
               <div className="text-base leading-4 text-grey group-hover:text-brown">

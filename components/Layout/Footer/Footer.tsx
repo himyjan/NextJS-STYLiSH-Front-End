@@ -23,7 +23,7 @@ const Footer = () => {
               );
             }
             return (
-              <>
+              <div key={`footer-${index + 1}`}>
                 <div
                   key={`footer-${index + 1}`}
                   className="text-[14px] leading-[20px] w-[121px] h-[20px] mb-[8px] text-light-grey"
@@ -31,7 +31,7 @@ const Footer = () => {
                   {item.text}
                 </div>
                 <div className="hidden" />
-              </>
+              </div>
             );
           })}
         </div>

@@ -13,8 +13,13 @@ module.exports = {
       "dark-grey": "#313538",
       grey: "#828282",
       "light-grey": "#D3D3D3",
+      "light-grey-2": "#BABABA",
+      "light-grey-3": "#979797",
+      "light-grey-4": "#ECECEC",
       white: "#FFFFFF",
       brown: "#8B572A",
+      black: "#000000",
+      "light-black": "#3F3A3A",
     },
     width: {
       full: "100%",
@@ -22,6 +27,7 @@ module.exports = {
     },
     height: {
       "img-h-sm": "max(204px,calc(40vw/153*204))",
+      "img-product-h-sm": "min(1290.667px,calc(100vw/360*480))",
     },
     gap: {
       "img-container-gap-sm": "clamp(6px,calc(100%/360*6),calc(6/360*1160px))",
@@ -36,6 +42,9 @@ module.exports = {
     },
     letterSpacing: {
       "product-text-sm": "0.15rem",
+      "product-title-sm": "0.25rem",
+      "product-id-sm": "0.2rem",
+      "product-var-sm": "0.175rem",
     },
     backgroundImage: {
       "loading-spinner": "url('../assets/images/loading.gif')",
