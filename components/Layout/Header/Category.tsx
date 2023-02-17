@@ -4,7 +4,7 @@ interface Category {
   hasNext: boolean;
   id: string;
   curCategory: string;
-  onClick: () => void;
+  onClick: (category: string) => void;
   text: string;
 }
 
@@ -22,7 +22,9 @@ const Category = ({ hasNext, id, curCategory, onClick, text }: Category) => {
               : `${CATEGORY_CLASS_NAME} text-grey`
           }
           id={id}
-          onClick={onClick}
+          onClick={() => {
+            onClick(id);
+          }}
           role="presentation"
         >
           <Link
@@ -47,7 +49,9 @@ const Category = ({ hasNext, id, curCategory, onClick, text }: Category) => {
           : `${CATEGORY_CLASS_NAME} text-grey`
       }
       id={id}
-      onClick={onClick}
+      onClick={() => {
+        onClick(id);
+      }}
       role="presentation"
     >
       <Link

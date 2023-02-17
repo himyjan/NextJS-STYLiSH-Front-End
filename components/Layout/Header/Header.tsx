@@ -60,9 +60,7 @@ const Header = () => {
                 hasNext={index === arr.length - 1 ? false : true}
                 id={item.id}
                 curCategory={curCategory}
-                onClick={() => {
-                  categoryHandler(item.id);
-                }}
+                onClick={categoryHandler}
                 text={item.text}
               />
             );
