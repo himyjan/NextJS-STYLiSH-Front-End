@@ -1,17 +1,22 @@
 import api from "../../utils/api";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { ProductData } from "@/types/types";
 import Image from "next/image";
 import ProductVariants from "@/components/Product/ProductVariants";
+import { storeCartDataHandler } from "@/store/cart-actions";
+
+let isInitial = false;
 
 const Product = () => {
   const [productData, setProductData] = useState<ProductData | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [id, setId] = useState<string>("");
   const router = useRouter();
   const { pid } = router.query;
+  const cart = useSelector((state: RootState) => state.cart);
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -28,6 +33,7 @@ const Product = () => {
         }
         setProductData(data);
       } catch (err) {
+        setError("Something went wrong!");
         console.log(err);
       }
     };
@@ -35,9 +41,20 @@ const Product = () => {
     fetchProductHandler();
   }, [pid, router.isReady]);
 
+  useEffect(() => {
+    if (isInitial) {
+      isInitial = true;
+      return;
+    }
+
+    if (cart.changed) {
+      storeCartDataHandler(cart);
+    }
+  }, [cart]);
+
   return (
     <>
-      {productData && !isLoading && !error && (
+      {productData && !error && (
         <div className="w-full flex flex-col">
           <div className="w-full relative mb-[17px]">
             <Image

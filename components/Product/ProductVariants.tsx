@@ -4,7 +4,7 @@ import { Colors, Variants } from "@/types/types";
 import { useCallback, useEffect, useState } from "react";
 import ColorButton from "./ColorButton";
 import SizeButton from "./SizeButton";
-import { addListener } from "process";
+import { AppDispatch } from "@/store";
 
 const ProductVariants = ({
   variants,
@@ -39,7 +39,7 @@ const ProductVariants = ({
   const [curStocksOfCurColor, setCurStocksOfCurColor] = useState<Variants[]>(
     []
   );
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   //   console.log(variants);
   //   console.log(colors);
   //   console.log(selectedVariants);

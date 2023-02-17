@@ -32,12 +32,6 @@ const Header = () => {
     setCurCategory(router.query.category || "all");
   }, [router.isReady, router.query.category]);
 
-  useEffect(() => {
-    console.log("item:", cart.items);
-    console.log("quantity:", cart.totalQuantity);
-    console.log("amount:", cart.amount);
-  }, [cart]);
-
   return (
     <header className="sticky top-0 w-screen z-50 bg-white">
       <div className="w-full">

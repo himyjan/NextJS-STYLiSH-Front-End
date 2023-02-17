@@ -38,3 +38,10 @@ export interface Cart {
   price: number;
   main_image: string;
 }
+
+export interface CartStore {
+  items: Cart[];
+  totalQuantity: number;
+  amount: number;
+  changed: boolean;
+}
