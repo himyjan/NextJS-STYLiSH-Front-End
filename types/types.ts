@@ -1,6 +1,17 @@
+export interface Colors {
+  code: string;
+  name: string;
+}
+
+export interface Variants {
+  color_code: string;
+  size: string;
+  stock: number;
+}
+
 export interface ProductData {
   category: string;
-  colors: { code: string; name: string }[];
+  colors: Colors[];
   description: string;
   id: number;
   images: string[];
@@ -12,6 +23,6 @@ export interface ProductData {
   story: string;
   texture: string;
   title: string;
-  variants: { color_code: string; size: string; stock: number }[];
+  variants: Variants[];
   wash: string;
 }

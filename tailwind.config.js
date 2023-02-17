@@ -14,8 +14,10 @@ module.exports = {
       grey: "#828282",
       "light-grey": "#D3D3D3",
       "light-grey-2": "#BABABA",
+      "light-grey-3": "#979797",
       white: "#FFFFFF",
       brown: "#8B572A",
+      black: "#000000",
       "light-black": "#3F3A3A",
     },
     width: {
@@ -41,6 +43,7 @@ module.exports = {
       "product-text-sm": "0.15rem",
       "product-title-sm": "0.25rem",
       "product-id-sm": "0.2rem",
+      "product-var-sm": "0.175rem",
     },
     backgroundImage: {
       "loading-spinner": "url('../assets/images/loading.gif')",

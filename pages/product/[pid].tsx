@@ -58,7 +58,11 @@ const Product = () => {
             <div className="text-[20px] leading-[24px] text-light-black pb-[10px] border-b border-light-black mb-[30px]">
               TWD.{productData.price}
             </div>
-            <ProductVariants />
+            <ProductVariants
+              variants={productData.variants}
+              colors={productData.colors}
+              sizes={productData.sizes}
+            />
             <div className="text-[14px] leading-[24px] mb-[24px]">
               實品顏色依單品照為主
             </div>
