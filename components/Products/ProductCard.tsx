@@ -5,7 +5,7 @@ import Link from "next/link";
 const ProductCard = ({ data }: { data: ProductData }) => {
   return (
     <div className="w-img-w-sm flex-shrink-0 flex flex-col h-fit relative">
-      <Link href={`/product/${data.id}`}>
+      <Link href={`/product/${data.id}`} className="cursor-pointer">
         <div className="w-full h-img-h-sm overflow-hidden relative">
           <Image fill sizes="100%" src={data.main_image} alt={data.title} />
         </div>
