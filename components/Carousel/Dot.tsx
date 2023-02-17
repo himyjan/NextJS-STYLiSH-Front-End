@@ -6,7 +6,7 @@ interface Dot {
   onMouseLeave: () => void;
 }
 
-const DOT_CLASS_NAME = "w-[4px] h-[4px] rounded";
+const DOT_CLASS_NAME = "w-[4px] h-[4px] rounded-full";
 
 const Dot = ({
   activeIndex,
