@@ -8,7 +8,8 @@ import ProductVariants from "@/components/Product/ProductVariants";
 const Product = () => {
   const [productData, setProductData] = useState<ProductData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
+  const [id, setId] = useState<string>("");
   const router = useRouter();
   const { pid } = router.query;
 
@@ -17,6 +18,7 @@ const Product = () => {
 
     const fetchProductHandler = async () => {
       if (typeof pid !== "string") return;
+      setId(pid);
 
       try {
         const response = await api.getProduct(pid);
@@ -62,6 +64,10 @@ const Product = () => {
               variants={productData.variants}
               colors={productData.colors}
               sizes={productData.sizes}
+              id={id}
+              title={productData.title}
+              price={productData.price}
+              mainImage={productData.main_image}
             />
             <div className="text-[14px] leading-[24px] mb-[24px]">
               實品顏色依單品照為主

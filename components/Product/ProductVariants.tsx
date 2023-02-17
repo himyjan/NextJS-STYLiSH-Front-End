@@ -1,16 +1,27 @@
+import { useDispatch } from "react-redux";
+import { cartActions } from "@/store/cart-slice";
 import { Colors, Variants } from "@/types/types";
 import { useCallback, useEffect, useState } from "react";
 import ColorButton from "./ColorButton";
 import SizeButton from "./SizeButton";
+import { addListener } from "process";
 
 const ProductVariants = ({
   variants,
   colors,
   sizes,
+  id,
+  title,
+  price,
+  mainImage,
 }: {
   variants: Variants[];
   colors: Colors[];
   sizes: string[];
+  id: string;
+  title: string;
+  price: number;
+  mainImage: string;
 }) => {
   const [selectedVariants, setSelectedVariants] = useState<{
     selectedColorCode: string;
@@ -28,6 +39,7 @@ const ProductVariants = ({
   const [curStocksOfCurColor, setCurStocksOfCurColor] = useState<Variants[]>(
     []
   );
+  const dispatch = useDispatch();
   //   console.log(variants);
   //   console.log(colors);
   //   console.log(selectedVariants);
@@ -119,7 +131,31 @@ const ProductVariants = ({
     setSelectedVariants(newVariants);
   };
 
-  const addToCartHandler = () => {};
+  const addToCartHandler = () => {
+    if (selectedVariants.curStock === 0) {
+      alert("已無庫存");
+      return;
+    }
+
+    if (!selectedVariants.selectedColorCode || !selectedVariants.selectedSize) {
+      alert("請選擇顏色及此寸");
+      return;
+    }
+
+    const newItem = {
+      id: id,
+      colorCode: selectedVariants.selectedColorCode,
+      colorName: selectedVariants.selectedColorName,
+      size: selectedVariants.selectedSize,
+      quantity: selectedVariants.quantity,
+      curStock: selectedVariants.curStock,
+      title: title,
+      price: price,
+      main_image: mainImage,
+    };
+    dispatch(cartActions.addItemToCart(newItem));
+    alert("已加入購物車");
+  };
 
   useEffect(() => {
     if (variants?.length > 0 && colors.length > 0 && sizes.length > 0) {
@@ -188,7 +224,10 @@ const ProductVariants = ({
           +
         </button>
       </div>
-      <button className="w-full h-[44px] bg-black text-white">
+      <button
+        className="w-full h-[44px] bg-black text-white"
+        onClick={addToCartHandler}
+      >
         加入購物車
       </button>
     </div>

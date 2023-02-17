@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../store";
+import { RootState } from "@/store";
 import { useEffect, useState } from "react";
-import LogoImage from "../../../assets/images/logo.png";
+import LogoImage from "@/assets/images/logo.png";
 import Category from "./Category";
 
 export const CATEGORY_DATA = [
@@ -31,6 +31,12 @@ const Header = () => {
       return;
     setCurCategory(router.query.category || "all");
   }, [router.isReady, router.query.category]);
+
+  useEffect(() => {
+    console.log("item:", cart.items);
+    console.log("quantity:", cart.totalQuantity);
+    console.log("amount:", cart.amount);
+  }, [cart]);
 
   return (
     <header className="sticky top-0 w-screen z-50 bg-white">

@@ -26,3 +26,15 @@ export interface ProductData {
   variants: Variants[];
   wash: string;
 }
+
+export interface Cart {
+  id: string;
+  colorCode: string;
+  colorName: string;
+  size: string;
+  quantity: number;
+  curStock: number;
+  title: string;
+  price: number;
+  main_image: string;
+}
