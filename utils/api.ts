@@ -1,3 +1,5 @@
+import { CartPostData } from "@/types/types";
+
 const api = {
   hostname: "https://api.appworks-school.tw/api/1.0",
   async getProducts(category: string, paging: number) {
@@ -20,7 +22,17 @@ const api = {
     const response = await fetch(`${this.hostname}/products/details?id=${id}`);
     return await response.json();
   },
-
+  async checkout(data: CartPostData, jwtToken: string) {
+    const response = await fetch(`${this.hostname}/order/checkout`, {
+      body: JSON.stringify(data),
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwtToken}`,
+      }),
+      method: "POST",
+    });
+    return await response.json();
+  },
   async signin(data: any) {
     const response = await fetch(`${this.hostname}/user/signin`, {
       body: JSON.stringify(data),

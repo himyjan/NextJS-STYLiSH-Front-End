@@ -45,3 +45,32 @@ export interface CartStore {
   amount: number;
   changed: boolean;
 }
+
+export interface CartPostData {
+  prime: any;
+  order: {
+    shipping: string;
+    payment: string;
+    subtotal: number;
+    freight: number;
+    total: number;
+    recipient: {
+      name: string;
+      email: string;
+      phone: string;
+      address: string;
+      time: string;
+    };
+    list: {
+      id: number | string;
+      name: string;
+      price: string | number;
+      color: {
+        code: string;
+        name: string;
+      };
+      size: string;
+      qty: number | string;
+    }[];
+  };
+}
