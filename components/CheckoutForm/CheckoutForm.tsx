@@ -89,13 +89,9 @@ const CheckoutForm = () => {
         cardExpirationDateRef.current,
         cardCCVRef.current
       );
-      setReady(true);
     };
 
-    if (isInitial) {
-      setupTappay();
-      isInitial = false;
-    }
+    setupTappay();
   }, []);
 
   return (
