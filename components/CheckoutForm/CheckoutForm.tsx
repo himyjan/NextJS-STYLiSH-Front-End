@@ -142,6 +142,9 @@ const CheckoutForm = () => {
               收件人姓名
             </label>
             <input
+              onChange={(e) =>
+                setRecipient({ ...recipient, name: e.target.value })
+              }
               className="w-full border border-light-grey-4 h-[32px] rounded-[8px] px-[5px] overflow-hidden"
               id="recipient"
             />
@@ -157,6 +160,9 @@ const CheckoutForm = () => {
               手機
             </label>
             <input
+              onChange={(e) =>
+                setRecipient({ ...recipient, phone: e.target.value })
+              }
               className="w-full border border-light-grey-4 h-[32px] rounded-[8px] px-[5px] overflow-hidden"
               id="mobilePhone"
             />
@@ -169,6 +175,9 @@ const CheckoutForm = () => {
               地址
             </label>
             <input
+              onChange={(e) =>
+                setRecipient({ ...recipient, address: e.target.value })
+              }
               className="w-full border border-light-grey-4 h-[32px] rounded-[8px] px-[5px] overflow-hidden"
               id="address"
             />
@@ -181,6 +190,9 @@ const CheckoutForm = () => {
               Email
             </label>
             <input
+              onChange={(e) =>
+                setRecipient({ ...recipient, email: e.target.value })
+              }
               className="w-full border border-light-grey-4 h-[32px] rounded-[8px] px-[5px] overflow-hidden"
               id="email"
             />
@@ -198,6 +210,10 @@ const CheckoutForm = () => {
                 id="deliverTime-1"
                 value="morning"
                 type="radio"
+                onChange={(e) => {
+                  if (e.target.checked)
+                    setRecipient({ ...recipient, time: "morning" });
+                }}
               />
               <label
                 htmlFor="deliverTime"
@@ -212,6 +228,10 @@ const CheckoutForm = () => {
                 id="deliverTime-2"
                 value="afternoon"
                 type="radio"
+                onChange={(e) => {
+                  if (e.target.checked)
+                    setRecipient({ ...recipient, time: "afternoon" });
+                }}
               />
               <label
                 htmlFor="deliverTime"
@@ -226,6 +246,10 @@ const CheckoutForm = () => {
                 id="deliverTime-3"
                 value="anytime"
                 type="radio"
+                onChange={(e) => {
+                  if (e.target.checked)
+                    setRecipient({ ...recipient, time: "anytime" });
+                }}
               />
               <label
                 htmlFor="deliverTime"
