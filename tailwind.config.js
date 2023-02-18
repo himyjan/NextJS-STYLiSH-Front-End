@@ -21,6 +21,7 @@ module.exports = {
       brown: "#8B572A",
       black: "#000000",
       "light-black": "#3F3A3A",
+      "fb-blue": "#3B5998",
     },
     width: {
       full: "100%",
