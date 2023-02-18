@@ -3,11 +3,12 @@ import Image from "next/image";
 
 const Member = () => {
   const { user, isLogin, login, logout, loading } = useAuth();
+  console.log(user);
 
   const renderContent = () => {
     if (isLogin)
       return (
-        <>
+        <div className="flex flex-col items-center">
           <div className="relative">
             <Image
               width={100}
@@ -24,7 +25,7 @@ const Member = () => {
           >
             Logout
           </button>
-        </>
+        </div>
       );
 
     return (
