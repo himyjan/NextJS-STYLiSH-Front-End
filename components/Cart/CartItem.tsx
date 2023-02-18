@@ -1,9 +1,23 @@
+import { AppDispatch } from "@/store";
+import { cartActions } from "@/store/cart-slice";
 import { Cart } from "@/types/types";
 import Image from "next/image";
-import TrashImage from "@/assets/images/cart-remove.png";
-import TrashHoverImage from "@/assets/images/cart-remove-hover.png";
+import { useDispatch } from "react-redux";
 
 const CartItem = ({ data }: { data: Cart }) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const quantityHandler = (newQuantity: string) => {
+    const newQuantityNum = Number(newQuantity);
+    if (newQuantityNum === data.quantity) return;
+    const newItem = { ...data, quantity: newQuantityNum };
+    dispatch(cartActions.editQuantity(newItem));
+  };
+
+  const removeItemHandler = () => {
+    dispatch(cartActions.removeItemFromCart(data));
+  };
+
   return (
     <div className="pt-[10px] pb-[20px] border-t border-light-black relative">
       <div className="flex gap-x-[10px] mb-[20px]">
@@ -57,7 +71,13 @@ const CartItem = ({ data }: { data: Cart }) => {
         </div>
         <div className="flex items-center justify-center w-full">
           <div className="text-[14px] leading-[17px] text-center flex-1">
-            <select className="text-light-black bg-light-grey-5 w-[80px] h-[30px] px-[10px] border border-light-grey-3 rounded">
+            <select
+              className="text-light-black bg-light-grey-5 w-[80px] h-[30px] px-[10px] border border-light-grey-3 rounded"
+              value={data.quantity}
+              onChange={(e) => {
+                quantityHandler(e.target.value);
+              }}
+            >
               {Array.from({ length: data.curStock }, (num, i) => i + 1).map(
                 (num) => {
                   return (
@@ -79,7 +99,10 @@ const CartItem = ({ data }: { data: Cart }) => {
         </div>
       </div>
       <div className="w-[44px] h-[44px] absolute top-0 right-0">
-        <button className="bg-cart-remove w-[44px] h-[44px] bg-cover bg-center hover:bg-cart-remove-hover" />
+        <button
+          className="bg-cart-remove w-[44px] h-[44px] bg-cover bg-center hover:bg-cart-remove-hover"
+          onClick={removeItemHandler}
+        />
       </div>
     </div>
   );

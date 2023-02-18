@@ -1,9 +1,24 @@
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import CartItem from "./CartItem";
+import { useEffect } from "react";
+import { storeCartDataHandler } from "@/store/cart-actions";
+
+let isInitial = false;
 
 const Cart = () => {
   const cart = useSelector((state: RootState) => state.cart);
+
+  useEffect(() => {
+    if (isInitial) {
+      isInitial = true;
+      return;
+    }
+
+    if (cart.changed) {
+      storeCartDataHandler(cart);
+    }
+  }, [cart]);
 
   return (
     <div className="pt-[20px] px-[24px]">
