@@ -17,6 +17,14 @@ export interface AuthContextInterface {
   logout: () => void;
 }
 
+export interface User {
+  email: string;
+  id: number;
+  name: string;
+  picture: string;
+  provider: string;
+}
+
 export const AuthContext = createContext<AuthContextInterface>({
   isLogin: false,
   user: {},
@@ -36,7 +44,13 @@ export const AuthContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [isLogin, setIsLogin] = useState<boolean>(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<User>({
+    email: "",
+    id: 0,
+    name: "",
+    picture: "",
+    provider: "",
+  });
   const [loading, setLoading] = useState<boolean>(true);
   const [jwtToken, setJwtToken] = useState<string>("");
 
@@ -87,7 +101,7 @@ export const AuthContextProvider = ({
     setLoading(true);
     await fb.logout();
     setIsLogin(false);
-    setUser({});
+    setUser({ email: "", id: 0, name: "", picture: "", provider: "" });
     setJwtToken("");
     window.localStorage.removeItem("jwtToken");
     setLoading(false);
