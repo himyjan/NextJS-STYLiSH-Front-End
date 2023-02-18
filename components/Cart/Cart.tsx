@@ -21,7 +21,7 @@ const Cart = () => {
   }, [cart]);
 
   return (
-    <div className="pt-[20px] px-[24px]">
+    <div className="pt-[20px]">
       <div className="flex flex-col">
         <div className="flex mb-[10px]">
           <div className="text-1 leading-[19px] font-bold">{`購物車(${cart.totalQuantity})`}</div>

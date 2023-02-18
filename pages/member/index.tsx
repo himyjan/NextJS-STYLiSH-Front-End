@@ -3,7 +3,6 @@ import Image from "next/image";
 
 const Member = () => {
   const { user, isLogin, login, logout, loading } = useAuth();
-  console.log(user);
 
   const renderContent = () => {
     if (isLogin)

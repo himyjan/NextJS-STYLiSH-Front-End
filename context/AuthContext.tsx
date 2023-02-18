@@ -44,13 +44,7 @@ export const AuthContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [isLogin, setIsLogin] = useState<boolean>(false);
-  const [user, setUser] = useState<User>({
-    email: "",
-    id: 0,
-    name: "",
-    picture: "",
-    provider: "",
-  });
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [jwtToken, setJwtToken] = useState<string>("");
 
@@ -101,7 +95,7 @@ export const AuthContextProvider = ({
     setLoading(true);
     await fb.logout();
     setIsLogin(false);
-    setUser({ email: "", id: 0, name: "", picture: "", provider: "" });
+    setUser(null);
     setJwtToken("");
     window.localStorage.removeItem("jwtToken");
     setLoading(false);
