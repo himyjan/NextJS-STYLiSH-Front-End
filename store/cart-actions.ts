@@ -1,5 +1,4 @@
 import { CartStore } from "@/types/types";
-
 import { cartActions } from "./cart-slice";
 
 export const initCartDataHandler = () => {
@@ -20,5 +19,4 @@ export const storeCartDataHandler = (cart: CartStore) => {
     amount: cart.amount,
   });
   window.localStorage.setItem("cartItems", cartData);
-  console.log("UPDATE");
 };
