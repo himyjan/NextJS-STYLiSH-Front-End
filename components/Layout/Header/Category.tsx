@@ -9,7 +9,7 @@ interface Category {
 }
 
 const CATEGORY_CLASS_NAME =
-  "h-[50px] flex justify-center items-center flex-1 text-center bg-dark-grey font-norma text-[20px] hover:text-white cursor-pointer";
+  "h-[50px] flex justify-center flex-1 items-center text-center bg-dark-grey font-norma text-[20px] hover:text-white cursor-pointer xl:bg-white xl:hover:text-brown xl:tracking-category-xl xl:-mr-[30px] xl:w-[150px] xl:flex-grow-0 xl:min-w-[150px]";
 
 const Category = ({ hasNext, id, curCategory, onClick, text }: Category) => {
   if (hasNext) {
@@ -18,8 +18,8 @@ const Category = ({ hasNext, id, curCategory, onClick, text }: Category) => {
         <div
           className={
             id === curCategory
-              ? `${CATEGORY_CLASS_NAME} text-white`
-              : `${CATEGORY_CLASS_NAME} text-grey`
+              ? `${CATEGORY_CLASS_NAME} text-white xl:text-brown`
+              : `${CATEGORY_CLASS_NAME} text-grey xl:text-light-black`
           }
           id={id}
           onClick={() => {
@@ -37,7 +37,7 @@ const Category = ({ hasNext, id, curCategory, onClick, text }: Category) => {
             {text}
           </Link>
         </div>
-        <div className="h-[20px] border-l border-grey" />
+        <div className="h-[20px] border-l border-grey xl:border-light-black" />
       </>
     );
   }
@@ -45,8 +45,8 @@ const Category = ({ hasNext, id, curCategory, onClick, text }: Category) => {
     <div
       className={
         id === curCategory
-          ? `${CATEGORY_CLASS_NAME} text-white`
-          : `${CATEGORY_CLASS_NAME} text-grey`
+          ? `${CATEGORY_CLASS_NAME} text-white xl:text-brown`
+          : `${CATEGORY_CLASS_NAME} text-grey xl:text-light-black`
       }
       id={id}
       onClick={() => {

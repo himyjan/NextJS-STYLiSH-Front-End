@@ -47,6 +47,7 @@ module.exports = {
       "product-title-sm": "0.25rem",
       "product-id-sm": "0.2rem",
       "product-var-sm": "0.175rem",
+      "category-xl": "30px",
     },
     backgroundImage: {
       "loading-spinner": "url('../assets/images/loading.gif')",
