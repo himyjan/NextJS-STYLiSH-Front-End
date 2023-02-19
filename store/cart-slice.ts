@@ -6,6 +6,7 @@ const initialState: CartStore = {
   totalQuantity: 0,
   amount: 0,
   changed: false,
+  orderNumber: "",
 };
 
 const cartSlice = createSlice({
@@ -86,6 +87,15 @@ const cartSlice = createSlice({
           item.colorCode !== newItem.colorCode ||
           item.size !== newItem.size
       );
+    },
+    checkout(state, action) {
+      const newOrderNumber = action.payload;
+      state.changed = true;
+
+      state.items = [];
+      state.amount = 0;
+      state.totalQuantity = 0;
+      state.orderNumber = newOrderNumber;
     },
   },
 });

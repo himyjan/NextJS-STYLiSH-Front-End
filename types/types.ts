@@ -44,6 +44,7 @@ export interface CartStore {
   totalQuantity: number;
   amount: number;
   changed: boolean;
+  orderNumber: string;
 }
 
 export interface CartPostData {

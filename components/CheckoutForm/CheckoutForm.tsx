@@ -1,9 +1,11 @@
 import { useAuth } from "@/context/AuthContext";
-import { RootState } from "@/store";
+import { AppDispatch, RootState } from "@/store";
+import { cartActions } from "@/store/cart-slice";
 import api from "@/utils/api";
 import tappay from "@/utils/tappay";
+import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CheckoutAmount from "./CheckoutAmount.";
 
 const FREIGHT = 30;
@@ -17,7 +19,7 @@ const CheckoutForm = () => {
     time: "",
   });
   const [invalidFields, setInvalidFields] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const cardNumberRef = useRef<HTMLDivElement>(null);
   const cardExpirationDateRef = useRef<HTMLDivElement>(null);
   const cardCCVRef = useRef<HTMLDivElement>(null);
@@ -25,11 +27,13 @@ const CheckoutForm = () => {
 
   const { jwtToken, isLogin, login } = useAuth();
   const cart = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
 
   const checkOutHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("checkout");
-    if (!formRef.current) return;
+    if (!formRef.current || isLoading) return;
     const cartItems = cart.items.map((item) => {
       return {
         id: item.id,
@@ -45,7 +49,7 @@ const CheckoutForm = () => {
     });
 
     try {
-      setLoading(true);
+      setIsLoading(true);
 
       const token = isLogin ? jwtToken : await login();
 
@@ -104,13 +108,14 @@ const CheckoutForm = () => {
         token
       );
       window.alert("付款成功");
-      // setCartItems([]);
-      console.log(data);
+      const orderNumber = String(data.number);
+      dispatch(cartActions.checkout(orderNumber));
+      router.push("/thankyou");
       // navigate("/thankyou", { state: { orderNumber: data.number } });
     } catch (err) {
       console.log(err);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -303,8 +308,11 @@ const CheckoutForm = () => {
           </div>
         </div>
         <CheckoutAmount freight={FREIGHT} />
-        <button className="bg-black text-white w-full h-[44px] text-center text-[16px]leading-[30px]">
-          確認付款
+        <button
+          className="bg-black text-white w-full h-[44px] text-center text-[16px]leading-[30px]"
+          disabled={isLoading}
+        >
+          {isLoading ? "付款處理中" : "確認付款"}
         </button>
       </form>
     </div>
