@@ -111,9 +111,8 @@ const CheckoutForm = () => {
       const orderNumber = String(data.number);
       dispatch(cartActions.checkout(orderNumber));
       router.push("/thankyou");
-      // navigate("/thankyou", { state: { orderNumber: data.number } });
     } catch (err) {
-      console.log(err);
+      window.alert("結帳失敗請稍後再試");
     } finally {
       setIsLoading(false);
     }
