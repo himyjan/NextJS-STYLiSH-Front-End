@@ -10,6 +10,13 @@ import CheckoutAmount from "./CheckoutAmount.";
 
 const FREIGHT = 30;
 
+const FORM_INPUT_WRAPPER_CLASS_NAME =
+  "flex flex-col gap-[10px] xl:w-[696px] xl:flex-row xl:flex-wrap xl:gap-[0px] xl:items-center";
+const FORM_INPUT_CLASS_NAME =
+  "w-full border border-light-grey-4 h-[32px] rounded-[8px] px-[5px] overflow-hidden xl:w-[576px]";
+const FORM_LABEL_CLASS_NAME =
+  "text-[14px] leading-[17px] text-light-black xl:w-[120px] xl:text-[14px] xl:leading-[19px]";
+
 const CheckoutForm = () => {
   const [recipient, setRecipient] = useState<{ [key: string]: string }>({
     name: "",
@@ -132,79 +139,67 @@ const CheckoutForm = () => {
   }, []);
 
   return (
-    <div className="w-full flex flex-col pb-[35px]">
+    <div className="w-full flex flex-col pb-[35px] xl:w-[1160px]">
       <form onSubmit={checkOutHandler} ref={formRef}>
-        <div className="w-full flex flex-col gap-[20px] mb-[24px]">
+        <div className="w-full flex flex-col gap-[20px] mb-[24px] xl:gap-[30px]">
           <div className="w-full text-[16px] leading-[19px] font-bold pb-[10px] mb-[20px] border-b border-light-black">
             訂購資料
           </div>
-          <div className="flex flex-col gap-[10px]">
-            <label
-              htmlFor="recipient"
-              className="text-[14px] leading-[17px] text-light-black"
-            >
+          <div className={FORM_INPUT_WRAPPER_CLASS_NAME}>
+            <label htmlFor="recipient" className={FORM_LABEL_CLASS_NAME}>
               收件人姓名
             </label>
             <input
               onChange={(e) =>
                 setRecipient({ ...recipient, name: e.target.value })
               }
-              className="w-full border border-light-grey-4 h-[32px] rounded-[8px] px-[5px] overflow-hidden"
+              className={FORM_INPUT_CLASS_NAME}
               id="recipient"
             />
-            <div className="text-[14px] leading-[17px] text-brown">
+            <div className="text-[14px] leading-[17px] text-brown xl:w-[696px] xl:text-right xl:mt-[10px]">
               務必填寫完整收件人姓名，避免包裹無法順利簽收
             </div>
           </div>
-          <div className="flex flex-col gap-[10px]">
-            <label
-              htmlFor="mobilePhone"
-              className="text-[14px] leading-[17px] text-light-black"
-            >
+          <div className={FORM_INPUT_WRAPPER_CLASS_NAME}>
+            <label htmlFor="mobilePhone" className={FORM_LABEL_CLASS_NAME}>
               手機
             </label>
             <input
               onChange={(e) =>
                 setRecipient({ ...recipient, phone: e.target.value })
               }
-              className="w-full border border-light-grey-4 h-[32px] rounded-[8px] px-[5px] overflow-hidden"
+              className={FORM_INPUT_CLASS_NAME}
               id="mobilePhone"
             />
           </div>
-          <div className="flex flex-col gap-[10px]">
-            <label
-              htmlFor="address"
-              className="text-[14px] leading-[17px] text-light-black"
-            >
+          <div className={FORM_INPUT_WRAPPER_CLASS_NAME}>
+            <label htmlFor="address" className={FORM_LABEL_CLASS_NAME}>
               地址
             </label>
             <input
               onChange={(e) =>
                 setRecipient({ ...recipient, address: e.target.value })
               }
-              className="w-full border border-light-grey-4 h-[32px] rounded-[8px] px-[5px] overflow-hidden"
+              className={FORM_INPUT_CLASS_NAME}
               id="address"
             />
           </div>
-          <div className="flex flex-col gap-[10px]">
-            <label
-              htmlFor="email"
-              className="text-[14px] leading-[17px] text-light-black"
-            >
+          <div className={FORM_INPUT_WRAPPER_CLASS_NAME}>
+            <label htmlFor="email" className={FORM_LABEL_CLASS_NAME}>
               Email
             </label>
             <input
               onChange={(e) =>
                 setRecipient({ ...recipient, email: e.target.value })
               }
-              className="w-full border border-light-grey-4 h-[32px] rounded-[8px] px-[5px] overflow-hidden"
+              className={FORM_INPUT_CLASS_NAME}
               id="email"
             />
           </div>
-          <div className="flex flex-wrap gap-[10px]">
+          <div className="flex flex-wrap gap-[10px] xl:flex-nowrap xl:items-center">
             <label
               htmlFor="deliverTime"
-              className="text-[14px] leading-[17px] text-light-black w-full"
+              className="text-[14px] leading-[17px] text-light-black w-full xl:w-[120px] xl:text-[14px] xl:leading-[19px]"
             >
               配送時間
             </label>
@@ -266,53 +261,49 @@ const CheckoutForm = () => {
           <div className="w-full text-[16px] leading-[19px] font-bold pb-[10px] mb-[20px] border-b border-light-black">
             付款資料
           </div>
-          <div className="flex flex-col gap-[10px]">
-            <label
-              htmlFor="card-number"
-              className="text-[14px] leading-[17px] text-light-black"
-            >
+          <div className={FORM_INPUT_WRAPPER_CLASS_NAME}>
+            <label htmlFor="card-number" className={FORM_LABEL_CLASS_NAME}>
               信用卡號碼
             </label>
             <div
-              className="w-full border border-light-grey-4 h-[32px] rounded-[8px] px-[5px] overflow-hidden"
+              className={FORM_INPUT_CLASS_NAME}
               id="card-number"
               ref={cardNumberRef}
             />
           </div>
-          <div className="flex flex-col gap-[10px]">
+          <div className={FORM_INPUT_WRAPPER_CLASS_NAME}>
             <label
               htmlFor="card-expiration-date"
-              className="text-[14px] leading-[17px] text-light-black"
+              className={FORM_LABEL_CLASS_NAME}
             >
               有效期限
             </label>
             <div
-              className="w-full border border-light-grey-4 h-[32px] rounded-[8px] px-[5px] overflow-hidden"
+              className={FORM_INPUT_CLASS_NAME}
               id="card-expiration-date"
               ref={cardExpirationDateRef}
             />
           </div>
-          <div className="flex flex-col gap-[10px]">
-            <label
-              htmlFor="card-ccv"
-              className="text-[14px] leading-[17px] text-light-black"
-            >
+          <div className={FORM_INPUT_WRAPPER_CLASS_NAME}>
+            <label htmlFor="card-ccv" className={FORM_LABEL_CLASS_NAME}>
               安全碼
             </label>
             <div
-              className="w-full border border-light-grey-4 h-[32px] rounded-[8px] px-[5px] overflow-hidden"
+              className={FORM_INPUT_CLASS_NAME}
               id="card-ccv"
               ref={cardCCVRef}
             />
           </div>
         </div>
         <CheckoutAmount freight={FREIGHT} />
-        <button
-          className="bg-black text-white w-full h-[44px] text-center text-[16px]leading-[30px]"
-          disabled={isLoading}
-        >
-          {isLoading ? "付款處理中" : "確認付款"}
-        </button>
+        <div className="xl:w-full xl:flex xl:justify-end">
+          <button
+            className="bg-black text-white w-full h-[44px] text-center text-[16px] leading-[30px] xl:w-[240px]"
+            disabled={isLoading}
+          >
+            {isLoading ? "付款處理中" : "確認付款"}
+          </button>
+        </div>
       </form>
     </div>
   );
