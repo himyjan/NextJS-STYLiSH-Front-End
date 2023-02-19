@@ -1,45 +1,25 @@
 import api from "../../utils/api";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { ProductData } from "@/types/types";
 import Image from "next/image";
 import ProductVariants from "@/components/Product/ProductVariants";
 import { storeCartDataHandler } from "@/store/cart-actions";
+import { GetServerSideProps } from "next";
+import { ParsedUrlQuery } from "querystring";
 
 let isInitial = false;
 
-const Product = () => {
-  const [productData, setProductData] = useState<ProductData | null>(null);
+const Product = ({ productData }: { productData: ProductData | null }) => {
   const [error, setError] = useState<string>("");
-  const [id, setId] = useState<string>("");
-  const router = useRouter();
-  const { pid } = router.query;
   const cart = useSelector((state: RootState) => state.cart);
 
   useEffect(() => {
-    if (!router.isReady) return;
-
-    const fetchProductHandler = async () => {
-      if (typeof pid !== "string") return;
-      setId(pid);
-
-      try {
-        const response = await api.getProduct(pid);
-        const data = response.data as ProductData | null;
-        if (data === null) {
-          throw new Error("invalid id");
-        }
-        setProductData(data);
-      } catch (err) {
-        setError("Something went wrong!");
-        console.log(err);
-      }
-    };
-
-    fetchProductHandler();
-  }, [pid, router.isReady]);
+    if (productData === null) {
+      setError("商品不存在");
+    }
+  }, [productData]);
 
   useEffect(() => {
     if (isInitial) {
@@ -83,7 +63,7 @@ const Product = () => {
                   variants={productData.variants}
                   colors={productData.colors}
                   sizes={productData.sizes}
-                  id={id}
+                  id={String(productData.id)}
                   title={productData.title}
                   price={productData.price}
                   mainImage={productData.main_image}
@@ -139,8 +119,26 @@ const Product = () => {
           </div>
         </div>
       )}
+      {error && (
+        <div className="p-[50px] w-full text-center text-[30px]">{error}</div>
+      )}
     </>
   );
 };
 
 export default Product;
+
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const url = (params as ParsedUrlQuery).pid as string;
+
+  const fetchProductHandler = async () => {
+    const response = await api.getProduct(url);
+    const data = response.data as ProductData | null;
+    return data;
+  };
+  const data = await fetchProductHandler();
+
+  return {
+    props: { productData: data },
+  };
+};
