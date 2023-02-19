@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Dot from "./Dot";
 import Story from "./Story";
+import { GetServerSideProps } from "next";
+import { ParsedUrlQuery } from "querystring";
 
 interface Carousel {
   id: number;
@@ -16,8 +18,7 @@ const CAROUSEL_IMAGE_CLASS_NAME =
 
 const CAROUSEL_TIME = 5000;
 
-const Carousel = () => {
-  const [carouselData, setCarouselData] = useState<Carousel[]>([]);
+const Carousel = ({ carouselData }: { carouselData: Carousel[] }) => {
   const [activeIndex, setActiveIndex] = useState<number>(1);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -33,16 +34,6 @@ const Carousel = () => {
   const selectCarouselHandler = (index: number) => {
     setActiveIndex(index);
   };
-
-  useEffect(() => {
-    const fetchDataHandler = async () => {
-      const response = await api.getCampaigns();
-      const data = response.data as Carousel[];
-      setCarouselData(data);
-    };
-
-    fetchDataHandler();
-  }, []);
 
   useEffect(() => {
     const carouselPlayHandler = () => {

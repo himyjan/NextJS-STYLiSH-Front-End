@@ -1,8 +1,10 @@
 import Carousel from "@/components/Carousel/Carousel";
 import Products from "@/components/Products/Products";
 import Head from "next/head";
+import api from "@/utils/api";
+import { GetServerSideProps } from "next";
 
-export default function Home() {
+export default function Home({ carouselData }: { carouselData: Carousel[] }) {
   return (
     <>
       <Head>
@@ -11,8 +13,21 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Carousel />
+      <Carousel carouselData={carouselData} />
       <Products />
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const fetchDataHandler = async () => {
+    const response = await api.getCampaigns();
+    const data = response.data as Carousel[];
+    return data;
+  };
+  const carouselData = await fetchDataHandler();
+
+  return {
+    props: { carouselData },
+  };
+};
