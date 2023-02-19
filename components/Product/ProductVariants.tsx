@@ -175,9 +175,9 @@ const ProductVariants = ({
   }, [colors, curStockHandler, curStocksOfCurColorHandler, sizes, variants]);
 
   return (
-    <div className="flex flex-col mb-[28px]">
+    <div className="flex flex-col mb-[28px] xl:mb-[40px]">
       <div className="flex justify-start items-center mb-[28px]">
-        <div className="text-[14px] leading-[17px] tracking-product-var-sm pr-[8px] border-r border-light-black">
+        <div className="text-[14px] leading-[17px] tracking-product-var-sm pr-[8px] border-r border-light-black xl:text-[20px] xl:leading-[24px] xl:tracking-product-title-sm">
           顏色
         </div>
         {colors?.length > 0 &&
@@ -192,8 +192,8 @@ const ProductVariants = ({
             );
           })}
       </div>
-      <div className="flex justify-start items-center mb-[38px]">
-        <div className="text-[14px] leading-[17px] tracking-product-var-sm pr-[8px] border-r border-light-black">
+      <div className="flex justify-start items-center mb-[38px] xl:mb-[19px]">
+        <div className="text-[14px] leading-[17px] tracking-product-var-sm pr-[8px] border-r border-light-black xl:text-[20px] xl:leading-[24px] xl:tracking-product-title-sm">
           尺寸
         </div>
         {curStocksOfCurColor?.length > 0 &&
@@ -209,19 +209,24 @@ const ProductVariants = ({
             );
           })}
       </div>
-      <div className="w-full h-[44px] flex justify-between items-center px-[35px] mb-[10px] border border-light-grey-3">
-        <button className="text-[16px]" onClick={reduceQuantityHandler}>
-          -
-        </button>
-        <div className="text-[20px] leading-[22px] text-brown">
-          {selectedVariants.quantity}
+      <div className="xl:flex xl:justify-start xl:items-center xl:h-[44px] xl:mb-[29px]">
+        <div className="hidden text-[14px] leading-[17px] tracking-product-var-sm pr-[8px] border-r border-light-black xl:flex xl:text-[20px] xl:leading-[24px] xl:tracking-product-title-sm">
+          數量
         </div>
-        <button className="text-[16px]" onClick={addQuantityHandler}>
-          +
-        </button>
+        <div className="w-full h-[44px] flex justify-between items-center px-[35px] mb-[10px] border border-light-grey-3 xl:w-[160px] xl:ml-[32px] xl:mb-[0px]">
+          <button className="text-[16px]" onClick={reduceQuantityHandler}>
+            -
+          </button>
+          <div className="text-[20px] leading-[22px] text-brown">
+            {selectedVariants.quantity}
+          </div>
+          <button className="text-[16px]" onClick={addQuantityHandler}>
+            +
+          </button>
+        </div>
       </div>
       <button
-        className="w-full h-[44px] bg-black text-white"
+        className="w-full h-[44px] bg-black text-white xl:h-[64px] xl:text-[20px] xl:leading-[30px] xl:tracking-product-title-sm"
         onClick={addToCartHandler}
       >
         加入購物車
