@@ -40,10 +40,6 @@ const ProductVariants = ({
     []
   );
   const dispatch = useDispatch<AppDispatch>();
-  //   console.log(variants);
-  //   console.log(colors);
-  //   console.log(selectedVariants);
-  //   console.log(curStocksOfCurColor);
 
   const curStockHandler = useCallback(
     (colorCode: string, size: string) => {
@@ -133,12 +129,12 @@ const ProductVariants = ({
 
   const addToCartHandler = () => {
     if (selectedVariants.curStock === 0) {
-      alert("已無庫存");
+      window.alert("已無庫存");
       return;
     }
 
     if (!selectedVariants.selectedColorCode || !selectedVariants.selectedSize) {
-      alert("請選擇顏色及此寸");
+      window.alert("請選擇顏色及此寸");
       return;
     }
 
@@ -154,7 +150,7 @@ const ProductVariants = ({
       main_image: mainImage,
     };
     dispatch(cartActions.addItemToCart(newItem));
-    alert("已加入購物車");
+    window.alert("已加入購物車");
   };
 
   useEffect(() => {
