@@ -74,8 +74,8 @@ const Products = () => {
   }, [category, fetchProductsHandler]);
 
   return (
-    <div className="flex flex-col items-center mx-auto px-img-container-px-sm pt-img-container-pt-sm pb-img-container-pb-sm relative">
-      <div className="flex flex-wrap gap-x-img-container-gap-sm justify-between">
+    <div className="flex flex-col items-center mx-auto px-img-container-px-sm pt-img-container-pt-sm pb-img-container-pb-sm relative xl:pt-[70px] xl:px-[60px]">
+      <div className="flex flex-wrap gap-x-img-container-gap-sm justify-between xl:gap-[40px] xl:max-w-[1160px] xl:justify-start">
         {productData?.map((product) => {
           return <ProductCard key={`product-${product.id}`} data={product} />;
         })}

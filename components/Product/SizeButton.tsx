@@ -1,5 +1,5 @@
 const SELECTED_SIZE_BOX =
-  "w-[36px] h-[36px] flex justify-center items-center rounded-full ml-[15px]";
+  "w-[36px] h-[36px] flex justify-center items-center rounded-full ml-[15px] xl:ml-[32px]";
 
 const SizeButton = ({
   size,

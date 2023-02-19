@@ -15,7 +15,9 @@ const Layout = ({ children }: { children: JSX.Element }) => {
   return (
     <>
       <Header />
-      <main className="min-h-[calc(100vh-308px)]">{children}</main>
+      <main className="min-h-[calc(100vh-308px)] xl:min-h-[calc(100vh-255px)]">
+        {children}
+      </main>
       <Footer />
     </>
   );

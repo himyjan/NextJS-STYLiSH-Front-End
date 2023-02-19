@@ -34,14 +34,14 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 w-screen z-50 bg-white">
-      <div className="w-full">
+      <div className="w-full xl:flex xl:justify-start xl:items-center xl:h-[140px] xl:border-b-[40px] xl:border-dark-grey xl:pl-[60px] xl:pr-[54px]">
         <div
-          className="w-full flex justify-center items-center h-[52px]"
+          className="w-full flex justify-center items-center h-[52px] xl:max-w-fit xl:mr-[57px]"
           onClick={() => {
             categoryHandler("all");
           }}
         >
-          <div className="mx-auto w-[129px] h-[24px]">
+          <div className="mx-auto w-[129px] h-[24px] xl:w-[256px] xl:h-[48px] xl:m-0 xl:flex-grow-0">
             <Link href={{ pathname: "/" }}>
               <Image
                 className="w-fill"
@@ -52,7 +52,7 @@ const Header = () => {
             </Link>
           </div>
         </div>
-        <div className="w-full flex justify-center items-center h-[50px] bg-dark-grey">
+        <div className="w-full flex justify-center items-center h-[50px] bg-dark-grey xl:bg-white xl:flex-1 xl:justify-start">
           {CATEGORY_DATA.map((item, index, arr) => {
             return (
               <Category
@@ -66,23 +66,23 @@ const Header = () => {
             );
           })}
         </div>
-        <div className="flex justify-center items-center absolute w-full top-[calc(100vh-60px)] h-[60px] bg-dark-grey">
+        <div className="flex justify-center items-center absolute w-full top-[calc(100vh-60px)] h-[60px] bg-dark-grey xl:relative xl:top-0 xl:bg-white xl:max-w-fit">
           <Link href="/checkout">
-            <div className="flex justify-center items-center w-[calc((100vw-1px)/2)] cursor-pointer relative group">
-              <div className="h-[24px] w-[24px] rounded-full text-center text-light-grey absolute bottom-0 -ml-[24px] bg-brown">
+            <div className="flex justify-center items-center w-[calc((100vw-1px)/2)] cursor-pointer relative group xl:w-[44px] xl:h-[44px] xl:ml-[42px]">
+              <div className="h-[24px] w-[24px] rounded-full text-center text-light-grey absolute bottom-0 -ml-[24px] bg-brown xl:right-0">
                 {cart.totalQuantity > 99 ? "99+" : cart.totalQuantity}
               </div>
-              <div className="bg-cart-mobile w-[44px] h-[44px] bg-no-repeat bg-center bg-cover group-hover:bg-cart-hover" />
-              <div className="text-base leading-4 text-grey group-hover:text-brown">
+              <div className="bg-cart-mobile w-[44px] h-[44px] bg-no-repeat bg-center bg-cover group-hover:bg-cart-hover xl:bg-cart" />
+              <div className="text-base leading-4 text-grey group-hover:text-brown xl:hidden">
                 購物車
               </div>
             </div>
           </Link>
-          <div className="border-l border-grey h-[24px]" />
+          <div className="border-l border-grey h-[24px] xl:hidden" />
           <Link href="/member">
-            <div className="flex justify-center items-center w-[calc((100vw-1px)/2)] cursor-pointer relative group">
-              <div className="bg-member-mobile w-[44px] h-[44px] bg-no-repeat bg-center bg-cover group-hover:bg-member-hover" />
-              <div className="text-base leading-4 text-grey group-hover:text-brown">
+            <div className="flex justify-center items-center w-[calc((100vw-1px)/2)] cursor-pointer relative group xl:w-[44px] xl:h-[44px] xl:ml-[42px]">
+              <div className="bg-member-mobile w-[44px] h-[44px] bg-no-repeat bg-center bg-cover group-hover:bg-member-hover xl:bg-member" />
+              <div className="text-base leading-4 text-grey group-hover:text-brown xl:hidden">
                 會員
               </div>
             </div>
