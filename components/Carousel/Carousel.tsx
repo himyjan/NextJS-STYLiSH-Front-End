@@ -12,7 +12,7 @@ interface Carousel {
 }
 
 const CAROUSEL_IMAGE_CLASS_NAME =
-  "w-full h-[185px] bg-center absolute bg-cover transition duration-1000 ";
+  "w-full h-[185px] bg-center absolute bg-cover transition duration-1000 xl:h-[500px]";
 
 const CAROUSEL_TIME = 5000;
 
@@ -65,7 +65,7 @@ const Carousel = () => {
   }, [carouselData, isPlaying]);
 
   return (
-    <div className="w-full h-[185px] bg-grey relative">
+    <div className="w-full h-[185px] relative xl:h-[500px]">
       {carouselData?.map((item) => {
         return (
           <Link
@@ -85,7 +85,7 @@ const Carousel = () => {
           </Link>
         );
       })}
-      <div className="absolute flex z-20 w-[55.2px] justify-between bottom-[18px] left-1/2 -translate-x-1/2 cursor-pointer">
+      <div className="absolute flex z-20 w-[55.2px] justify-between bottom-[18px] left-1/2 -translate-x-1/2 cursor-pointer xl:w-[128px] xl:bottom-[34px]">
         {carouselData?.map((item) => {
           return (
             <Dot
