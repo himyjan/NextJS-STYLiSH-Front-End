@@ -1,3 +1,4 @@
+import { ChangeEvent, KeyboardEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -14,12 +15,24 @@ export const CATEGORY_DATA = [
 ];
 
 const Header = () => {
-  const [curCategory, setCurCategory] = useState("all");
+  const [curCategory, setCurCategory] = useState<string>("all");
+  const [searchKeyword, setSearchKeyword] = useState<string>("");
   const router = useRouter();
   const cart = useSelector((state: RootState) => state.cart);
 
   const categoryHandler = (category: string) => {
     setCurCategory(category);
+  };
+
+  const searchKeywordHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchKeyword(e.target.value);
+  };
+
+  const searchHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (!searchKeyword) return;
+    if (e.key === "Enter") {
+      router.push(`/?keyword=${searchKeyword}`);
+    }
   };
 
   useEffect(() => {
@@ -65,6 +78,15 @@ const Header = () => {
               />
             );
           })}
+        </div>
+        <div>
+          <input
+            type="text"
+            className="rounded-[22px] text-[0px] focus:text-[20px] bg-white w-[40px] xl:w-[214px] h-[40px] focus:w-[calc(100vw-20px)] mx-[10px] absolute top-[6px] right-[6px] xl:h-[44px] focus:border xl:border xl:relative border-light-grey-3 xl:text-[20px] text-brown leading-[24px] pl-[20px] bg-search bg-no-repeat bg-right hover:bg-search-hover xl:focus:w-[214px]"
+            onKeyDown={searchHandler}
+            onChange={searchKeywordHandler}
+            value={searchKeyword}
+          />
         </div>
         <div className="flex justify-center items-center absolute w-full top-[calc(100vh-60px)] h-[60px] bg-dark-grey xl:relative xl:top-0 xl:bg-white xl:max-w-fit">
           <Link href="/checkout">
