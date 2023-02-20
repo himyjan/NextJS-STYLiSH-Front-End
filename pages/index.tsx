@@ -1,6 +1,5 @@
 import Carousel from "@/components/Carousel/Carousel";
 import Products from "@/components/Products/Products";
-import Head from "next/head";
 import api from "@/utils/api";
 import { GetServerSideProps } from "next";
 import { ProductData } from "@/types/types";
@@ -15,15 +14,6 @@ export default function Home({
 }) {
   return (
     <>
-      <Head>
-        <title>STYLiSH</title>
-        <meta
-          name="description"
-          content="STYLiSH, One of best clothing shopping site in world."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <Carousel carouselData={carouselData} />
       <Products firstPageData={productsData} />
     </>
@@ -40,6 +30,16 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   };
 
   const fetchFirstPageDataHandler = async () => {
+    const searchKeyword = url.keyword;
+    if (typeof searchKeyword === "string") {
+      const response = await api.searchProducts(searchKeyword, 0);
+      const data = response.data as ProductData[];
+      const nextPaging = response.next_paging as number | undefined;
+      if (nextPaging === undefined) {
+        return { data, nextPaging: null };
+      }
+      return { data, nextPaging };
+    }
     const category = url.category || "all";
     const response = await api.getProducts(category as string, 0);
     const data = response.data as ProductData[];

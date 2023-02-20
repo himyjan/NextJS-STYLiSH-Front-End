@@ -63,6 +63,8 @@ module.exports = {
       facebook: "url('../assets/images/facebook.png')",
       "cart-remove": "url('../assets/images/cart-remove.png')",
       "cart-remove-hover": "url('../assets/images/cart-remove-hover.png')",
+      search: "url('../assets/images/search.png')",
+      "search-hover": "url('../assets/images/search-hover.png')",
     },
     extend: {},
   },
