@@ -25,7 +25,7 @@ const Products = ({
   const fetchProductsHandler = useCallback(async () => {
     if (isLoading || !router.isReady) return;
     if (!category || !paging) return;
-    console.log("fetch", paging);
+
     try {
       setIsLoading(true);
       const response = await api.getProducts(category, paging);

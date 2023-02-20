@@ -39,7 +39,7 @@ const CheckoutForm = () => {
 
   const checkOutHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("checkout");
+
     if (!formRef.current || isLoading) return;
     const cartItems = cart.items.map((item) => {
       return {
