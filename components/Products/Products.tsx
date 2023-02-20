@@ -10,9 +10,13 @@ const options = {
   threshold: 0,
 };
 
-const Products = () => {
+const Products = ({
+  firstPageData,
+}: {
+  firstPageData: { data: ProductData[]; nextPaging: number | null };
+}) => {
   const [productData, setProductData] = useState<ProductData[]>([]);
-  const [paging, setPaging] = useState<number | undefined>(0);
+  const [paging, setPaging] = useState<number | null>(firstPageData.nextPaging);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [category, setCategory] = useState<string>("");
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -20,15 +24,19 @@ const Products = () => {
 
   const fetchProductsHandler = useCallback(async () => {
     if (isLoading || !router.isReady) return;
-    if (!category || paging === undefined) return;
-
+    if (!category || !paging) return;
+    console.log("fetch", paging);
     try {
       setIsLoading(true);
       const response = await api.getProducts(category, paging);
       const data = response.data as ProductData[];
       const nextPaging = response.next_paging as number | undefined;
       setProductData((prev) => [...prev, ...data]);
-      setPaging(nextPaging);
+      if (nextPaging === undefined) {
+        setPaging(null);
+      } else {
+        setPaging(nextPaging);
+      }
       setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -46,11 +54,11 @@ const Products = () => {
         return;
       setProductData([]);
       setCategory(router.query.category || "all");
-      setPaging(0);
+      setPaging(firstPageData.nextPaging);
     };
 
     categoryHandler();
-  }, [router.isReady, router.query.category]);
+  }, [firstPageData.nextPaging, router.isReady, router.query.category]);
 
   useEffect(() => {
     const observerHandler = (entries: { isIntersecting: boolean }[]) => {
@@ -76,7 +84,10 @@ const Products = () => {
   return (
     <div className="flex flex-col items-center mx-auto px-img-container-px-sm pt-img-container-pt-sm pb-img-container-pb-sm relative xl:pt-[70px] xl:px-[60px]">
       <div className="flex flex-wrap gap-x-img-container-gap-sm justify-between xl:gap-[40px] xl:max-w-[1160px] xl:justify-start">
-        {productData?.map((product) => {
+        {firstPageData.data.map((product) => {
+          return <ProductCard key={`product-${product.id}`} data={product} />;
+        })}
+        {productData.map((product) => {
           return <ProductCard key={`product-${product.id}`} data={product} />;
         })}
       </div>
