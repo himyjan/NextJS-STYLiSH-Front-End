@@ -1,10 +1,7 @@
-import api from "@/utils/api";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Dot from "./Dot";
 import Story from "./Story";
-import { GetServerSideProps } from "next";
-import { ParsedUrlQuery } from "querystring";
 
 interface Carousel {
   id: number;
