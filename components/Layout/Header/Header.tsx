@@ -37,13 +37,18 @@ const Header = () => {
 
   useEffect(() => {
     if (!router.isReady) return;
+    if (typeof router.query.keyword === "string") {
+      setSearchKeyword(router.query.keyword);
+      return;
+    }
+
     if (
       typeof router.query.category !== "string" &&
       typeof router.query.category !== "undefined"
     )
       return;
     setCurCategory(router.query.category || "all");
-  }, [router.isReady, router.query.category]);
+  }, [router.isReady, router.query.category, router.query.keyword]);
 
   return (
     <header className="sticky top-0 w-screen z-50 bg-white">
