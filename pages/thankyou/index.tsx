@@ -16,7 +16,7 @@ const ThankYou = () => {
   return (
     <div className="flex justify-center items-center">
       {cart.orderNumber && (
-        <div className="pt-[50px]">{`訂單編號:${cart.orderNumber}已成立`}</div>
+        <div className="pt-[50px] text-[20px] xl:text-[30px]">{`訂單編號: ${cart.orderNumber} 已成立`}</div>
       )}
     </div>
   );
