@@ -22,6 +22,7 @@ module.exports = {
       black: "#000000",
       "light-black": "#3F3A3A",
       "fb-blue": "#3B5998",
+      warning: "#FF9494",
     },
     width: {
       full: "100%",
