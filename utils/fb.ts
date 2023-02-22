@@ -1,3 +1,5 @@
+import { FbAuthResponse } from "@/types/types";
+
 const FB_SCRIPT_ID = "facebook-jssdk";
 const FB_SCRIPT_SRC = "https://connect.facebook.net/zh_TW/sdk.js";
 
@@ -26,7 +28,7 @@ const fb = {
   },
   getLoginStatus() {
     return new Promise((resolve) => {
-      window.FB.getLoginStatus((response: any) => {
+      window.FB.getLoginStatus((response: FbAuthResponse) => {
         resolve(response);
       });
     });
@@ -34,7 +36,7 @@ const fb = {
   login() {
     return new Promise((resolve) => {
       window.FB.login(
-        (response: any) => {
+        (response: FbAuthResponse) => {
           resolve(response);
         },
         { scope: "public_profile,email" }

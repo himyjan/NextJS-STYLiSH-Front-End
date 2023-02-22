@@ -7,6 +7,7 @@ import {
 } from "react";
 import fb from "@/utils/fb";
 import api from "@/utils/api";
+import { FbAuthResponse } from "@/types/types";
 
 export interface AuthContextInterface {
   isLogin: boolean;
@@ -15,6 +16,7 @@ export interface AuthContextInterface {
   jwtToken: string;
   login: () => void;
   logout: () => void;
+  error: string;
 }
 
 export interface User {
@@ -32,6 +34,7 @@ export const AuthContext = createContext<AuthContextInterface>({
   jwtToken: "",
   login: () => {},
   logout: () => {},
+  error: "",
 });
 
 export const useAuth = () => {
@@ -47,13 +50,19 @@ export const AuthContextProvider = ({
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [jwtToken, setJwtToken] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
-  const handleLoginResponse = useCallback(async (response: any) => {
+  const handleLoginResponse = useCallback(async (response: FbAuthResponse) => {
+    setError("");
     const accessToken = response.authResponse.accessToken;
-    const { data } = await api.signin({
+    const { data, error } = await api.signin({
       provider: "facebook",
       access_token: accessToken,
     });
+    if (!data && error) {
+      setError(error.code);
+      return;
+    }
     const { access_token: tokenFromServer, user: userData } = data;
     setUser(userData);
     setJwtToken(tokenFromServer);
@@ -65,7 +74,7 @@ export const AuthContextProvider = ({
   useEffect(() => {
     const checkAuthStatus = async () => {
       await fb.init();
-      const response = (await fb.getLoginStatus()) as { status: string };
+      const response = (await fb.getLoginStatus()) as FbAuthResponse;
       if (response.status === "connected") {
         handleLoginResponse(response);
         setLoading(false);
@@ -79,7 +88,7 @@ export const AuthContextProvider = ({
 
   const login = async () => {
     setLoading(true);
-    const response = (await fb.login()) as { status: string };
+    const response = (await fb.login()) as FbAuthResponse;
     if (response.status === "connected") {
       const tokenFromServer = handleLoginResponse(response);
       setLoading(false);
@@ -106,6 +115,7 @@ export const AuthContextProvider = ({
     user,
     loading,
     jwtToken,
+    error,
     login,
     logout,
   };
