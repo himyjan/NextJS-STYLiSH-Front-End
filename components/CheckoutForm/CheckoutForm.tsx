@@ -77,7 +77,7 @@ const CheckoutForm = () => {
         );
         formRef.current.scrollIntoView({
           behavior: "smooth",
-          block: "center",
+          block: "start",
         });
         return;
       }
@@ -153,7 +153,11 @@ const CheckoutForm = () => {
               onChange={(e) =>
                 setRecipient({ ...recipient, name: e.target.value })
               }
-              className={FORM_INPUT_CLASS_NAME}
+              className={
+                invalidFields.some((item) => item === "name")
+                  ? `${FORM_INPUT_CLASS_NAME} border-warning`
+                  : FORM_INPUT_CLASS_NAME
+              }
               id="recipient"
             />
             <div className="text-[14px] leading-[17px] text-brown xl:w-[696px] xl:text-right xl:mt-[10px]">
@@ -168,7 +172,11 @@ const CheckoutForm = () => {
               onChange={(e) =>
                 setRecipient({ ...recipient, phone: e.target.value })
               }
-              className={FORM_INPUT_CLASS_NAME}
+              className={
+                invalidFields.some((item) => item === "phone")
+                  ? `${FORM_INPUT_CLASS_NAME} border-warning`
+                  : FORM_INPUT_CLASS_NAME
+              }
               id="mobilePhone"
             />
           </div>
@@ -180,7 +188,11 @@ const CheckoutForm = () => {
               onChange={(e) =>
                 setRecipient({ ...recipient, address: e.target.value })
               }
-              className={FORM_INPUT_CLASS_NAME}
+              className={
+                invalidFields.some((item) => item === "address")
+                  ? `${FORM_INPUT_CLASS_NAME} border-warning`
+                  : FORM_INPUT_CLASS_NAME
+              }
               id="address"
             />
           </div>
@@ -192,11 +204,21 @@ const CheckoutForm = () => {
               onChange={(e) =>
                 setRecipient({ ...recipient, email: e.target.value })
               }
-              className={FORM_INPUT_CLASS_NAME}
+              className={
+                invalidFields.some((item) => item === "email")
+                  ? `${FORM_INPUT_CLASS_NAME} border-warning`
+                  : FORM_INPUT_CLASS_NAME
+              }
               id="email"
             />
           </div>
-          <div className="flex flex-wrap gap-[10px] xl:flex-nowrap xl:items-center">
+          <div
+            className={
+              invalidFields.some((item) => item === "time")
+                ? "flex flex-wrap gap-[10px] xl:flex-nowrap xl:items-center border rounded border-warning"
+                : "flex flex-wrap gap-[10px] xl:flex-nowrap xl:items-center"
+            }
+          >
             <label
               htmlFor="deliverTime"
               className="text-[14px] leading-[17px] text-light-black w-full xl:w-[120px] xl:text-[14px] xl:leading-[19px]"
