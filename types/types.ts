@@ -48,7 +48,7 @@ export interface CartStore {
 }
 
 export interface CartPostData {
-  prime: string;
+  prime: any;
   order: {
     shipping: string;
     payment: string;
@@ -86,23 +86,4 @@ export interface FbAuthResponse {
     userID: string;
   };
   status: string;
-}
-
-export interface FbAuthSignInData {
-  access_token: string;
-  provider: string;
-}
-
-export interface TappayCard {
-  bank_id: string;
-  bincode: string;
-  country: string;
-  countrycode: string;
-  funding: number;
-  issuer: string;
-  issuer_zh_tw: string;
-  lastfour: string;
-  level: string;
-  prime: string;
-  type: number;
 }

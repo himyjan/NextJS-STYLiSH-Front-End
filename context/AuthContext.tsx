@@ -9,6 +9,16 @@ import fb from "@/utils/fb";
 import api from "@/utils/api";
 import { FbAuthResponse } from "@/types/types";
 
+export interface AuthContextInterface {
+  isLogin: boolean;
+  user: any;
+  loading: boolean;
+  jwtToken: string;
+  login: () => void;
+  logout: () => void;
+  error: string;
+}
+
 export interface User {
   email: string;
   id: number;
@@ -17,19 +27,9 @@ export interface User {
   provider: string;
 }
 
-export interface AuthContextInterface {
-  isLogin: boolean;
-  user: User | null;
-  loading: boolean;
-  jwtToken: string;
-  login: () => void;
-  logout: () => void;
-  error: string;
-}
-
 export const AuthContext = createContext<AuthContextInterface>({
   isLogin: false,
-  user: null,
+  user: {},
   loading: false,
   jwtToken: "",
   login: () => {},
