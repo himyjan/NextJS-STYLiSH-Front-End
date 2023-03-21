@@ -1,6 +1,7 @@
 import { useAuth } from "@/context/AuthContext";
 import { AppDispatch, RootState } from "@/store";
 import { cartActions } from "@/store/cart-slice";
+import { TappayCard } from "@/types/types";
 import api from "@/utils/api";
 import tappay from "@/utils/tappay";
 import { useRouter } from "next/router";
@@ -87,7 +88,10 @@ const CheckoutForm = () => {
         return;
       }
 
-      const result = (await tappay.getPrime()) as { status: number; card: any };
+      const result = (await tappay.getPrime()) as {
+        status: number;
+        card: TappayCard;
+      };
       if (result.status !== 0) {
         window.alert("付款資料輸入有誤");
         return;
@@ -237,7 +241,7 @@ const CheckoutForm = () => {
                 }}
               />
               <label
-                htmlFor="deliverTime"
+                htmlFor="deliverTime-1"
                 className="text-[14px] leading-[26px] ml-[5px]"
               >
                 08:00-12:00
@@ -255,7 +259,7 @@ const CheckoutForm = () => {
                 }}
               />
               <label
-                htmlFor="deliverTime"
+                htmlFor="deliverTime-2"
                 className="text-[14px] leading-[26px] ml-[5px]"
               >
                 14:00-18:00
@@ -273,7 +277,7 @@ const CheckoutForm = () => {
                 }}
               />
               <label
-                htmlFor="deliverTime"
+                htmlFor="deliverTime-3"
                 className="text-[14px] leading-[26px] ml-[5px]"
               >
                 不指定
