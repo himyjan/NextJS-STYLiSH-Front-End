@@ -87,3 +87,8 @@ export interface FbAuthResponse {
   };
   status: string;
 }
+
+export interface FbAuthSignInData {
+  access_token: string;
+  provider: string;
+}
