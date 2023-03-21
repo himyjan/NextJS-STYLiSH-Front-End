@@ -1,8 +1,9 @@
+// @ts-nocheck
 const TAPPAY_SCRIPT_ID = "tappay-sdk";
 const TAPPAY_SCRIPT_SRC = "https://js.tappaysdk.com/tpdirect/v5.8.0";
 
 function insertTappayScript() {
-  return new Promise((resolve: any) => {
+  return new Promise((resolve) => {
     if (document.getElementById(TAPPAY_SCRIPT_ID)) {
       resolve();
       return;
@@ -24,7 +25,7 @@ const tappay = {
       "sandbox"
     );
   },
-  setupCard(numberElement: any, expirationDateElement: any, ccvElement: any) {
+  setupCard(numberElement, expirationDateElement, ccvElement) {
     window.TPDirect.card.setup({
       fields: {
         number: {
@@ -55,7 +56,7 @@ const tappay = {
   },
   getPrime() {
     return new Promise((resolve) => {
-      window.TPDirect.card.getPrime((result: unknown) => {
+      window.TPDirect.card.getPrime((result) => {
         resolve(result);
       });
     });
