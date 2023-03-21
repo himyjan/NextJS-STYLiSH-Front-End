@@ -1,6 +1,7 @@
 import { useAuth } from "@/context/AuthContext";
 import { AppDispatch, RootState } from "@/store";
 import { cartActions } from "@/store/cart-slice";
+import { TappayCard } from "@/types/types";
 import api from "@/utils/api";
 import tappay from "@/utils/tappay";
 import { useRouter } from "next/router";
@@ -87,7 +88,10 @@ const CheckoutForm = () => {
         return;
       }
 
-      const result = (await tappay.getPrime()) as { status: number; card: any };
+      const result = (await tappay.getPrime()) as {
+        status: number;
+        card: TappayCard;
+      };
       if (result.status !== 0) {
         window.alert("付款資料輸入有誤");
         return;
