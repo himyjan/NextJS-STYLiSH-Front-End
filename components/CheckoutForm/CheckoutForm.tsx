@@ -241,7 +241,7 @@ const CheckoutForm = () => {
                 }}
               />
               <label
-                htmlFor="deliverTime"
+                htmlFor="deliverTime-1"
                 className="text-[14px] leading-[26px] ml-[5px]"
               >
                 08:00-12:00
@@ -259,7 +259,7 @@ const CheckoutForm = () => {
                 }}
               />
               <label
-                htmlFor="deliverTime"
+                htmlFor="deliverTime-2"
                 className="text-[14px] leading-[26px] ml-[5px]"
               >
                 14:00-18:00
@@ -277,7 +277,7 @@ const CheckoutForm = () => {
                 }}
               />
               <label
-                htmlFor="deliverTime"
+                htmlFor="deliverTime-3"
                 className="text-[14px] leading-[26px] ml-[5px]"
               >
                 不指定
