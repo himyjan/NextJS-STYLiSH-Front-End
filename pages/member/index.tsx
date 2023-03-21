@@ -15,7 +15,7 @@ const Member = () => {
       );
     }
 
-    if (isLogin && user)
+    if (isLogin)
       return (
         <div className="flex flex-col items-center">
           <div className="relative">

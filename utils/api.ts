@@ -1,4 +1,4 @@
-import { CartPostData, FbAuthSignInData } from "@/types/types";
+import { CartPostData } from "@/types/types";
 
 const api = {
   hostname: "https://api.appworks-school.tw/api/1.0",
@@ -33,13 +33,22 @@ const api = {
     });
     return await response.json();
   },
-  async signin(data: FbAuthSignInData) {
+  async signin(data: any) {
     const response = await fetch(`${this.hostname}/user/signin`, {
       body: JSON.stringify(data),
       headers: new Headers({
         "Content-Type": "application/json",
       }),
       method: "POST",
+    });
+    return await response.json();
+  },
+  async getProfile(jwtToken: any) {
+    const response = await fetch(`${this.hostname}/user/profile`, {
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwtToken}`,
+      }),
     });
     return await response.json();
   },
