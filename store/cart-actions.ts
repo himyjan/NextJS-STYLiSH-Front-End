@@ -2,9 +2,7 @@ import { CartStore } from "@/types/types";
 import { cartActions } from "./cart-slice";
 
 export const initCartDataHandler = () => {
-  return async (
-    dispatch: (arg0: { payload: any; type: "cart/initCart" }) => void
-  ) => {
+  return async (dispatch: (arg0: { type: "cart/initCart" }) => void) => {
     const cartString = window.localStorage.getItem("cartItems");
     if (!cartString) return;
     const cartData = JSON.parse(cartString);
