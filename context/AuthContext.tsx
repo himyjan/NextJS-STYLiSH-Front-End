@@ -4,10 +4,10 @@ import {
   useEffect,
   useCallback,
   useContext,
-} from "react";
-import fb from "@/utils/fb";
-import api from "@/utils/api";
-import { FbAuthResponse } from "@/types/types";
+} from 'react';
+import fb from '@/utils/fb';
+import api from '@/utils/api';
+import type { FbAuthResponse } from '@/types/types';
 
 export interface User {
   email: string;
@@ -31,10 +31,10 @@ export const AuthContext = createContext<AuthContextInterface>({
   isLogin: false,
   user: null,
   loading: false,
-  jwtToken: "",
+  jwtToken: '',
   login: () => {},
   logout: () => {},
-  error: "",
+  error: '',
 });
 
 export const useAuth = () => {
@@ -49,14 +49,14 @@ export const AuthContextProvider = ({
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [jwtToken, setJwtToken] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [jwtToken, setJwtToken] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
   const handleLoginResponse = useCallback(async (response: FbAuthResponse) => {
-    setError("");
+    setError('');
     const accessToken = response.authResponse.accessToken;
     const { data, error } = await api.signin({
-      provider: "facebook",
+      provider: 'facebook',
       access_token: accessToken,
     });
     if (!data && error) {
@@ -66,7 +66,7 @@ export const AuthContextProvider = ({
     const { access_token: tokenFromServer, user: userData } = data;
     setUser(userData);
     setJwtToken(tokenFromServer);
-    window.localStorage.setItem("jwtToken", tokenFromServer);
+    window.localStorage.setItem('jwtToken', tokenFromServer);
     setIsLogin(true);
     return tokenFromServer;
   }, []);
@@ -75,11 +75,11 @@ export const AuthContextProvider = ({
     const checkAuthStatus = async () => {
       await fb.init();
       const response = (await fb.getLoginStatus()) as FbAuthResponse;
-      if (response.status === "connected") {
+      if (response.status === 'connected') {
         handleLoginResponse(response);
         setLoading(false);
       } else {
-        window.localStorage.removeItem("jwtToken");
+        window.localStorage.removeItem('jwtToken');
         setLoading(false);
       }
     };
@@ -89,12 +89,12 @@ export const AuthContextProvider = ({
   const login = async () => {
     setLoading(true);
     const response = (await fb.login()) as FbAuthResponse;
-    if (response.status === "connected") {
+    if (response.status === 'connected') {
       const tokenFromServer = handleLoginResponse(response);
       setLoading(false);
       return tokenFromServer;
     } else {
-      window.localStorage.removeItem("jwtToken");
+      window.localStorage.removeItem('jwtToken');
       setLoading(false);
       return null;
     }
@@ -105,8 +105,8 @@ export const AuthContextProvider = ({
     await fb.logout();
     setIsLogin(false);
     setUser(null);
-    setJwtToken("");
-    window.localStorage.removeItem("jwtToken");
+    setJwtToken('');
+    window.localStorage.removeItem('jwtToken');
     setLoading(false);
   };
 

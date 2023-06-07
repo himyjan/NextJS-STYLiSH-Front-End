@@ -2,7 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["api.appworks-school.tw", "graph.facebook.com"],
+    domains: ['api.appworks-school.tw', 'graph.facebook.com'],
+    formats: ['image/avif', 'image/webp'],
   },
 };
 

@@ -1,12 +1,12 @@
-import { ProductData } from "@/types/types";
-import api from "@/utils/api";
-import { useRouter } from "next/router";
-import { useCallback, useEffect, useRef, useState } from "react";
-import ProductCard from "./ProductCard";
+import type { ProductData } from '@/types/types';
+import api from '@/utils/api';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import ProductCard from './ProductCard';
 
 const options = {
   root: null,
-  rootMargin: "0px",
+  rootMargin: '0px',
   threshold: 0,
 };
 
@@ -18,8 +18,8 @@ const Products = ({
   const [productData, setProductData] = useState<ProductData[]>([]);
   const [paging, setPaging] = useState<number | null>(firstPageData.nextPaging);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [category, setCategory] = useState<string>("");
-  const [searchKeyword, setSearchKeyword] = useState<string>("");
+  const [category, setCategory] = useState<string>('');
+  const [searchKeyword, setSearchKeyword] = useState<string>('');
   const containerRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
@@ -49,7 +49,7 @@ const Products = ({
   const searchProductsHandler = useCallback(async () => {
     if (isLoading || !router.isReady) return;
     if (!searchKeyword || !paging) return;
-    setCategory("");
+    setCategory('');
 
     try {
       setIsLoading(true);
@@ -72,18 +72,18 @@ const Products = ({
   useEffect(() => {
     const categoryHandler = () => {
       if (!router.isReady) return;
-      if (typeof router.query.keyword === "string") {
+      if (typeof router.query.keyword === 'string') {
         setSearchKeyword(router.query.keyword);
         return;
       }
 
       if (
-        typeof router.query.category !== "string" &&
-        typeof router.query.category !== "undefined"
+        typeof router.query.category !== 'string' &&
+        typeof router.query.category !== 'undefined'
       )
         return;
       setProductData([]);
-      setCategory(router.query.category || "all");
+      setCategory(router.query.category || 'all');
       setPaging(firstPageData.nextPaging);
     };
 
@@ -118,8 +118,8 @@ const Products = ({
   }, [category, fetchProductsHandler, searchProductsHandler]);
 
   return (
-    <div className="flex flex-col items-center mx-auto px-img-container-px-sm pt-img-container-pt-sm pb-img-container-pb-sm relative xl:pt-[70px] xl:px-[60px]">
-      <div className="flex flex-wrap w-full gap-x-img-container-gap-sm justify-between xl:gap-[40px] xl:max-w-[1160px] xl:justify-start">
+    <div className="flex w-full justify-center">
+      <div className="xl:mx-auto mx-[21px] mt-[15px] flex w-[calc(100%-42px)] flex-wrap xl:mt-[70px] xl:w-full xl:max-w-[1200px]">
         {firstPageData.data.map((product) => {
           return <ProductCard key={`product-${product.id}`} data={product} />;
         })}
@@ -131,15 +131,15 @@ const Products = ({
         {productData.map((product) => {
           return <ProductCard key={`product-${product.id}`} data={product} />;
         })}
+        <div
+          className={
+            isLoading
+              ? 'my-[20px] h-[40px] w-[40px] bg-loading-spinner bg-cover bg-center bg-no-repeat'
+              : ''
+          }
+          ref={containerRef}
+        />
       </div>
-      <div
-        className={
-          isLoading
-            ? "h-[40px] w-[40px] bg-loading-spinner bg-no-repeat bg-center bg-cover my-[20px]"
-            : ""
-        }
-        ref={containerRef}
-      />
     </div>
   );
 };

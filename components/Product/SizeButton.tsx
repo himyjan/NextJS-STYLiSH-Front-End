@@ -1,5 +1,5 @@
 const SELECTED_SIZE_BOX =
-  "w-[36px] h-[36px] flex justify-center items-center rounded-full ml-[15px] xl:ml-[32px]";
+  'w-[36px] h-[36px] flex justify-center items-center rounded-full ml-[15px] xl:ml-[32px]';
 
 const SizeButton = ({
   size,
@@ -31,7 +31,7 @@ const SizeButton = ({
 
   return (
     <button
-      className={`${SELECTED_SIZE_BOX} bg-light-grey-4 text-light-black text-opacity-10 cursor-not-allowed`}
+      className={`${SELECTED_SIZE_BOX} cursor-not-allowed bg-light-grey-4 text-light-black text-opacity-10`}
       disabled
     >
       {size}

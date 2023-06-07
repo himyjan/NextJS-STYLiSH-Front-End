@@ -1,26 +1,21 @@
 interface Dot {
-  activeIndex: number;
+  $isActive: boolean;
   index: number;
   onClick: () => void;
   onMouseOver: () => void;
   onMouseLeave: () => void;
 }
 
-const DOT_CLASS_NAME = "w-[4px] h-[4px] rounded-full xl:w-[10px] xl:h-[10px]";
+const DOT_CLASS_NAME =
+  'w-[4px] h-[4px] mx-[4.4px] rounded-full xl:w-[10px] xl:h-[10px] xl:mx-[11px]';
 
-const Dot = ({
-  activeIndex,
-  index,
-  onClick,
-  onMouseOver,
-  onMouseLeave,
-}: Dot) => {
+const Dot = ({ $isActive, index, onClick, onMouseOver, onMouseLeave }: Dot) => {
   return (
     <div
       className={
-        activeIndex === index
+        $isActive
           ? `${DOT_CLASS_NAME} bg-brown`
-          : `${DOT_CLASS_NAME} bg-white opacity-40`
+          : `${DOT_CLASS_NAME} bg-white/40`
       }
       onClick={onClick}
       onMouseOver={onMouseOver}

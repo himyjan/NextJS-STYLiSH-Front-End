@@ -1,9 +1,9 @@
-import Carousel from "@/components/Carousel/Carousel";
-import Products from "@/components/Products/Products";
-import api from "@/utils/api";
-import { GetServerSideProps } from "next";
-import { ProductData } from "@/types/types";
-import { ParsedUrlQuery } from "querystring";
+import Carousel from '@/components/Carousel/Carousel';
+import Products from '@/components/Products/Products';
+import api from '@/utils/api';
+import { GetServerSideProps } from 'next';
+import type { ProductData } from '@/types/types';
+import { ParsedUrlQuery } from 'querystring';
 
 export default function Home({
   carouselData,
@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
   const fetchFirstPageDataHandler = async () => {
     const searchKeyword = url.keyword;
-    if (typeof searchKeyword === "string") {
+    if (typeof searchKeyword === 'string') {
       const response = await api.searchProducts(searchKeyword, 0);
       const data = response.data as ProductData[];
       const nextPaging = response.next_paging as number | undefined;
@@ -40,7 +40,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       }
       return { data, nextPaging };
     }
-    const category = url.category || "all";
+    const category = url.category || 'all';
     const response = await api.getProducts(category as string, 0);
     const data = response.data as ProductData[];
     const nextPaging = response.next_paging as number | undefined;

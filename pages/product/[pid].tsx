@@ -1,23 +1,23 @@
-import api from "../../utils/api";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
-import { useEffect, useState } from "react";
-import { ProductData } from "@/types/types";
-import Image from "next/image";
-import ProductVariants from "@/components/Product/ProductVariants";
-import { storeCartDataHandler } from "@/store/cart-actions";
-import { GetServerSideProps } from "next";
-import { ParsedUrlQuery } from "querystring";
+import api from '../../utils/api';
+import { useSelector } from 'react-redux';
+import type { RootState } from '@/store';
+import { useEffect, useState } from 'react';
+import type { ProductData } from '@/types/types';
+import Image from 'next/image';
+import ProductVariants from '@/components/Product/ProductVariants';
+import { storeCartDataHandler } from '@/store/cart-actions';
+import { GetServerSideProps } from 'next';
+import { ParsedUrlQuery } from 'querystring';
 
 let isInitial = false;
 
 const Product = ({ productData }: { productData: ProductData | null }) => {
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string>('');
   const cart = useSelector((state: RootState) => state.cart);
 
   useEffect(() => {
     if (productData === null) {
-      setError("商品不存在");
+      setError('商品不存在');
     }
   }, [productData]);
 
@@ -36,27 +36,27 @@ const Product = ({ productData }: { productData: ProductData | null }) => {
     <>
       {productData && !error && (
         <div className="xl:flex xl:flex-col xl:items-center xl:pt-[65px]">
-          <div className="w-full flex flex-col xl:w-[960px]">
+          <div className="flex w-full flex-col xl:w-[960px]">
             <div className="xl:flex xl:w-full">
-              <div className="w-full relative mb-[17px] xl:w-[560px] xl:h-[746.67px]">
+              <div className="relative mb-[17px] w-full xl:h-[746.67px] xl:w-[560px]">
                 <Image
                   width="0"
                   height="0"
                   sizes="100vw"
                   src={productData.main_image}
                   alt={productData.title}
-                  className="w-full h-auto"
+                  className="h-auto w-full"
                   priority
                 />
               </div>
-              <div className="mb-[28px] px-[24px] xl:pr-[0px] xl:pl-[40px] xl:flex-1 xl:mb-[50.33px]">
-                <div className="text-[20px] leading-[24px] text-light-black mb-[10px] tracking-product-title-sm xl:text-[32px] xl:leading-[38px] xl:mb-[16px] xl:tracking-product-title-xl">
+              <div className="mb-[28px] px-[24px] xl:mb-[50.33px] xl:flex-1 xl:pl-[40px] xl:pr-[0px]">
+                <div className="xl:tracking-product-title-xl mb-[10px] text-[20px] leading-[24px] tracking-product-title-sm text-light-black xl:mb-[16px] xl:text-[32px] xl:leading-[38px]">
                   {productData.title}
                 </div>
-                <div className="text-[16px] leading-[19px] text-light-grey-2 mb-[20px] tracking-product-id-sm xl:text-[20px] xl:leading-[24px] xl:mb-[40px]">
+                <div className="mb-[20px] text-[16px] leading-[19px] tracking-product-id-sm text-light-grey-2 xl:mb-[40px] xl:text-[20px] xl:leading-[24px]">
                   {productData.id}
                 </div>
-                <div className="text-[20px] leading-[24px] text-light-black pb-[10px] border-b border-light-black mb-[30px] xl:text-[30px] xl:leading-[36px] xl:pb-[20px]">
+                <div className="mb-[30px] border-b border-light-black pb-[10px] text-[20px] leading-[24px] text-light-black xl:pb-[20px] xl:text-[30px] xl:leading-[36px]">
                   TWD.{productData.price}
                 </div>
                 <ProductVariants
@@ -68,13 +68,13 @@ const Product = ({ productData }: { productData: ProductData | null }) => {
                   price={productData.price}
                   mainImage={productData.main_image}
                 />
-                <div className="text-[14px] leading-[24px] mb-[24px] xl:text-[20px] xl:leading-[30px] xl:mb-[30px]">
+                <div className="mb-[24px] text-[14px] leading-[24px] xl:mb-[30px] xl:text-[20px] xl:leading-[30px]">
                   實品顏色依單品照為主
                 </div>
                 <div className="text-[14px] leading-[24px] xl:text-[20px] xl:leading-[30px]">
                   {productData.texture}
                 </div>
-                <div className="text-[14px] leading-[24px] mb-[24px] whitespace-pre xl:text-[20px] xl:leading-[30px] xl:mb-[30px]">
+                <div className="mb-[24px] whitespace-pre text-[14px] leading-[24px] xl:mb-[30px] xl:text-[20px] xl:leading-[30px]">
                   {productData.description}
                 </div>
                 <div className="text-[14px] leading-[24px] xl:text-[20px] xl:leading-[30px]">
@@ -85,21 +85,21 @@ const Product = ({ productData }: { productData: ProductData | null }) => {
                 </div>
               </div>
             </div>
-            <div className="w-full flex flex-col px-[24px] xl:px-[0px]">
-              <div className="flex items-center mb-[12px] xl:mb-[28px]">
-                <div className="text-[16px] leading-[30px] text-brown pr-[35px] xl:text-[20px] xl:leading-[30px] xl:pr-[65px]">
+            <div className="flex w-full flex-col px-[24px] xl:px-[0px]">
+              <div className="mb-[12px] flex items-center xl:mb-[28px]">
+                <div className="pr-[35px] text-[16px] leading-[30px] text-brown xl:pr-[65px] xl:text-[20px] xl:leading-[30px]">
                   更多產品資訊
                 </div>
-                <div className="border-b border-light-black flex-1" />
+                <div className="flex-1 border-b border-light-black" />
               </div>
-              <div className="text-[14px] leading-[25px] text-light-black mb-[20px] xl:text-[20px] xl:leading-[30px] xl:mb-[30px]">
+              <div className="mb-[20px] text-[14px] leading-[25px] text-light-black xl:mb-[30px] xl:text-[20px] xl:leading-[30px]">
                 {productData.story}
               </div>
-              <div className="flex flex-col w-full gap-y-[20px] mb-[32px] xl:gap-y-[30px] xl:mb-[49px]">
+              <div className="mb-[32px] flex w-full flex-col gap-y-[20px] xl:mb-[49px] xl:gap-y-[30px]">
                 {productData.images.map((image, index) => {
                   return (
                     <div
-                      className="w-full block relative"
+                      className="relative block w-full"
                       key={`image-${index + 1}`}
                     >
                       <Image
@@ -108,7 +108,7 @@ const Product = ({ productData }: { productData: ProductData | null }) => {
                         sizes="100vw"
                         src={image}
                         alt={productData.title}
-                        className="w-full h-auto"
+                        className="h-auto w-full"
                         loading="lazy"
                       />
                     </div>
@@ -120,7 +120,7 @@ const Product = ({ productData }: { productData: ProductData | null }) => {
         </div>
       )}
       {error && (
-        <div className="p-[50px] w-full text-center text-[30px]">{error}</div>
+        <div className="w-full p-[50px] text-center text-[30px]">{error}</div>
       )}
     </>
   );

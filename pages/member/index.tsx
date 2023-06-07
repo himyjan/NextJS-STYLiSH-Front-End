@@ -1,8 +1,8 @@
-import { useAuth } from "@/context/AuthContext";
-import Image from "next/image";
+import { useAuth } from '@/context/AuthContext';
+import Image from 'next/image';
 
 const ERROR_MESSAGE = {
-  ER_LOCK_WAIT_TIMEOUT: "Request login token timeout, please try again later.",
+  ER_LOCK_WAIT_TIMEOUT: 'Request login token timeout, please try again later.',
 };
 
 const Member = () => {
@@ -11,7 +11,7 @@ const Member = () => {
   const renderContent = () => {
     if (loading) {
       return (
-        <div className="h-40px w-40px bg-loading-spinner bg-center bg-cover" />
+        <div className="h-40px w-40px bg-loading-spinner bg-cover bg-center" />
       );
     }
 
@@ -30,7 +30,7 @@ const Member = () => {
           <div>{user.email}</div>
           <button
             onClick={logout}
-            className="bg-fb-blue text-white p-[10px] rounded-[8px]"
+            className="rounded-[8px] bg-fb-blue p-[10px] text-white"
           >
             Logout
           </button>
@@ -41,15 +41,15 @@ const Member = () => {
       <div className="flex flex-col items-center gap-[10px]">
         <button
           onClick={login}
-          className="bg-fb-blue text-white p-[10px] rounded-[8px] w-[200px]"
+          className="w-[200px] rounded-[8px] bg-fb-blue p-[10px] text-white"
         >
           Login with facebook
         </button>
         {error && (
-          <div className="text-[16px] xl:text-[20px] text-warning">
-            {error === "ER_LOCK_WAIT_TIMEOUT"
+          <div className="text-[16px] text-warning xl:text-[20px]">
+            {error === 'ER_LOCK_WAIT_TIMEOUT'
               ? ERROR_MESSAGE.ER_LOCK_WAIT_TIMEOUT
-              : "Something went wrong!"}
+              : 'Something went wrong!'}
           </div>
         )}
       </div>
@@ -58,7 +58,7 @@ const Member = () => {
 
   return (
     <div className="flex flex-col items-center p-[20px]">
-      <div className="text-[20px] p-[5px] border-b mb-[20px]">會員基本資料</div>
+      <div className="mb-[20px] border-b p-[5px] text-[20px]">會員基本資料</div>
       <div className="w-full">{renderContent()}</div>
     </div>
   );

@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import Dot from "./Dot";
-import Story from "./Story";
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+import Dot from './Dot';
+import Story from './Story';
 
 interface Carousel {
   id: number;
@@ -11,12 +11,12 @@ interface Carousel {
 }
 
 const CAROUSEL_IMAGE_CLASS_NAME =
-  "w-full h-[185px] bg-center absolute bg-cover transition duration-1000 xl:h-[500px]";
+  'w-full h-[185px] flex justify-center bg-center absolute bg-cover ease transition duration-1000 xl:h-[500px]';
 
 const CAROUSEL_TIME = 5000;
 
 const Carousel = ({ carouselData }: { carouselData: Carousel[] }) => {
-  const [activeIndex, setActiveIndex] = useState<number>(1);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -36,7 +36,7 @@ const Carousel = ({ carouselData }: { carouselData: Carousel[] }) => {
     const carouselPlayHandler = () => {
       intervalRef.current = setInterval(() => {
         setActiveIndex((prevIndex) =>
-          prevIndex === carouselData.length ? 1 : prevIndex + 1
+          prevIndex === carouselData.length - 1 ? 0 : prevIndex + 1,
         );
       }, CAROUSEL_TIME);
     };
@@ -53,35 +53,34 @@ const Carousel = ({ carouselData }: { carouselData: Carousel[] }) => {
   }, [carouselData, isPlaying]);
 
   return (
-    <div className="w-full h-[185px] relative xl:h-[500px]">
+    <div className="relative flex h-[185px] w-full justify-center xl:h-[500px]">
       {carouselData?.map((item) => {
         return (
           <Link
             href={`/product/${item.product_id}`}
             key={`carousel-${item.product_id}`}
+            className={
+              activeIndex === item.id - 1
+                ? `${CAROUSEL_IMAGE_CLASS_NAME}`
+                : `${CAROUSEL_IMAGE_CLASS_NAME} opacity-0`
+            }
+            style={{ backgroundImage: `url(${item.picture})` }}
+            onMouseOver={carouselStopHandler}
+            onMouseLeave={carouselRestartHandler}
           >
-            <div
-              className={
-                activeIndex === item.id
-                  ? `${CAROUSEL_IMAGE_CLASS_NAME} z-10 `
-                  : `${CAROUSEL_IMAGE_CLASS_NAME} opacity-0`
-              }
-              style={{ backgroundImage: `url(${item.picture})` }}
-            >
-              <Story story={item.story} />
-            </div>
+            <Story story={item.story} />
           </Link>
         );
       })}
-      <div className="absolute flex z-20 w-[55.2px] justify-between bottom-[18px] left-1/2 -translate-x-1/2 cursor-pointer xl:w-[128px] xl:bottom-[34px]">
-        {carouselData?.map((item) => {
+      <div className="z-2 mx-auto absolute bottom-[18px] flex cursor-pointer xl:bottom-[34px]">
+        {carouselData?.map((item, index) => {
           return (
             <Dot
               key={`dot-${item.product_id}`}
-              index={item.id}
-              activeIndex={activeIndex}
+              index={index}
+              $isActive={activeIndex === index}
               onClick={() => {
-                selectCarouselHandler(item.id);
+                selectCarouselHandler(item.id - 1);
               }}
               onMouseOver={carouselStopHandler}
               onMouseLeave={carouselRestartHandler}

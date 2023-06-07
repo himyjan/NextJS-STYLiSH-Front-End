@@ -1,16 +1,16 @@
-import { CartStore } from "@/types/types";
-import { createSlice } from "@reduxjs/toolkit";
+import type { CartStore } from '@/types/types';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: CartStore = {
   items: [],
   totalQuantity: 0,
   amount: 0,
   changed: false,
-  orderNumber: "",
+  orderNumber: '',
 };
 
 const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState,
   reducers: {
     initCart(state, action) {
@@ -26,7 +26,7 @@ const cartSlice = createSlice({
         (item) =>
           item.id === newItem.id &&
           item.colorCode === newItem.colorCode &&
-          item.size === newItem.size
+          item.size === newItem.size,
       );
 
       state.changed = true;
@@ -43,12 +43,12 @@ const cartSlice = createSlice({
           (item) =>
             item.id === newItem.id &&
             item.colorCode === newItem.colorCode &&
-            item.size === newItem.size
+            item.size === newItem.size,
         );
         const prevQuantity = state.items[index].quantity;
         const newQuantity = Math.min(
           newItem.curStock,
-          prevQuantity + newItem.quantity
+          prevQuantity + newItem.quantity,
         );
 
         state.totalQuantity = state.totalQuantity + newQuantity - prevQuantity;
@@ -63,7 +63,7 @@ const cartSlice = createSlice({
         (item) =>
           item.id === newItem.id &&
           item.colorCode === newItem.colorCode &&
-          item.size === newItem.size
+          item.size === newItem.size,
       );
       const prevQuantity = state.items[index].quantity;
       const newQuantity = newItem.quantity;
@@ -85,7 +85,7 @@ const cartSlice = createSlice({
         (item) =>
           item.id !== newItem.id ||
           item.colorCode !== newItem.colorCode ||
-          item.size !== newItem.size
+          item.size !== newItem.size,
       );
     },
     checkout(state, action) {

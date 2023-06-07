@@ -1,10 +1,10 @@
-import { CartPostData, FbAuthSignInData } from "@/types/types";
+import type { CartPostData, FbAuthSignInData } from '@/types/types';
 
 const api = {
-  hostname: "https://api.appworks-school.tw/api/1.0",
+  hostname: 'https://api.appworks-school.tw/api/1.0',
   async getProducts(category: string, paging: number) {
     const response = await fetch(
-      `${this.hostname}/products/${category}?paging=${paging}`
+      `${this.hostname}/products/${category}?paging=${paging}`,
     );
     return await response.json();
   },
@@ -14,7 +14,7 @@ const api = {
   },
   async searchProducts(keyword: string, paging: number) {
     const response = await fetch(
-      `${this.hostname}/products/search?keyword=${keyword}&paging=${paging}`
+      `${this.hostname}/products/search?keyword=${keyword}&paging=${paging}`,
     );
     return await response.json();
   },
@@ -26,10 +26,10 @@ const api = {
     const response = await fetch(`${this.hostname}/order/checkout`, {
       body: JSON.stringify(data),
       headers: new Headers({
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${jwtToken}`,
       }),
-      method: "POST",
+      method: 'POST',
     });
     return await response.json();
   },
@@ -37,9 +37,9 @@ const api = {
     const response = await fetch(`${this.hostname}/user/signin`, {
       body: JSON.stringify(data),
       headers: new Headers({
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       }),
-      method: "POST",
+      method: 'POST',
     });
     return await response.json();
   },

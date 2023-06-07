@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 interface Category {
   hasNext: boolean;
@@ -9,7 +9,7 @@ interface Category {
 }
 
 const CATEGORY_CLASS_NAME =
-  "h-[50px] flex justify-center flex-1 items-center text-center bg-dark-grey font-norma text-[20px] hover:text-white cursor-pointer xl:bg-white xl:hover:text-brown xl:tracking-category-xl xl:-mr-[30px] xl:w-[150px] xl:flex-grow-0 xl:min-w-[150px]";
+  'h-[50px] flex justify-center flex-1 items-center text-center bg-dark-grey font-norma text-[20px] hover:text-white cursor-pointer xl:bg-white xl:hover:text-brown xl:tracking-category-xl xl:-mr-[30px] xl:w-[150px] xl:flex-grow-0 xl:min-w-[150px]';
 
 const Category = ({ hasNext, id, curCategory, onClick, text }: Category) => {
   if (hasNext) {
@@ -29,10 +29,10 @@ const Category = ({ hasNext, id, curCategory, onClick, text }: Category) => {
         >
           <Link
             href={{
-              pathname: "/",
+              pathname: '/',
               query: { category: id },
             }}
-            style={{ width: "100%" }}
+            style={{ width: '100%' }}
           >
             {text}
           </Link>
@@ -56,10 +56,10 @@ const Category = ({ hasNext, id, curCategory, onClick, text }: Category) => {
     >
       <Link
         href={{
-          pathname: "/",
+          pathname: '/',
           query: { category: id },
         }}
-        style={{ width: "100%" }}
+        style={{ width: '100%' }}
       >
         {text}
       </Link>

@@ -1,9 +1,10 @@
-import { CartStore } from "@/types/types";
-import { cartActions } from "./cart-slice";
+import type { CartStore } from '@/types/types';
+import type { Dispatch } from '@reduxjs/toolkit';
+import { cartActions } from './cart-slice';
 
 export const initCartDataHandler = () => {
-  return async (dispatch: (arg0: { type: "cart/initCart" }) => void) => {
-    const cartString = window.localStorage.getItem("cartItems");
+  return async (dispatch: Dispatch) => {
+    const cartString = window.localStorage.getItem('cartItems');
     if (!cartString) return;
     const cartData = JSON.parse(cartString);
     dispatch(cartActions.initCart(cartData));
@@ -16,5 +17,5 @@ export const storeCartDataHandler = (cart: CartStore) => {
     totalQuantity: cart.totalQuantity,
     amount: cart.amount,
   });
-  window.localStorage.setItem("cartItems", cartData);
+  window.localStorage.setItem('cartItems', cartData);
 };

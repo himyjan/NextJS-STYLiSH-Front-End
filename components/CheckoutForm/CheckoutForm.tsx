@@ -1,30 +1,28 @@
-import { useAuth } from "@/context/AuthContext";
-import { AppDispatch, RootState } from "@/store";
-import { cartActions } from "@/store/cart-slice";
-import { TappayCard } from "@/types/types";
-import api from "@/utils/api";
-import tappay from "@/utils/tappay";
-import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import CheckoutAmount from "./CheckoutAmount.";
-
-const FREIGHT = 30;
+import { useAuth } from '@/context/AuthContext';
+import { AppDispatch, RootState } from '@/store';
+import { cartActions } from '@/store/cart-slice';
+import type { TappayCard } from '@/types/types';
+import api from '@/utils/api';
+import tappay from '@/utils/tappay';
+import { useRouter } from 'next/router';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import CheckoutAmount from './CheckoutAmount.';
 
 const FORM_INPUT_WRAPPER_CLASS_NAME =
-  "flex flex-col gap-[10px] xl:w-[696px] xl:flex-row xl:flex-wrap xl:gap-[0px] xl:items-center";
+  'flex flex-col gap-[10px] xl:w-[696px] xl:flex-row xl:flex-wrap xl:gap-[0px] xl:items-center';
 const FORM_INPUT_CLASS_NAME =
-  "w-full border border-light-grey-4 h-[32px] rounded-[8px] px-[5px] overflow-hidden xl:w-[576px]";
+  'w-full border border-light-grey-4 h-[32px] rounded-[8px] px-[5px] overflow-hidden xl:w-[576px]';
 const FORM_LABEL_CLASS_NAME =
-  "text-[14px] leading-[17px] text-light-black xl:w-[120px] xl:text-[14px] xl:leading-[19px]";
+  'text-[14px] leading-[17px] text-light-black xl:w-[120px] xl:text-[14px] xl:leading-[19px]';
 
 const CheckoutForm = () => {
   const [recipient, setRecipient] = useState<{ [key: string]: string }>({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    time: "",
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    time: '',
   });
   const [invalidFields, setInvalidFields] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,6 +35,8 @@ const CheckoutForm = () => {
   const cart = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
+
+  const FREIGHT = cart.amount > 0 ? 30 : 0;
 
   const checkOutHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -62,29 +62,29 @@ const CheckoutForm = () => {
       const token = isLogin ? jwtToken : await login();
 
       if (!token) {
-        window.alert("請登入會員");
+        window.alert('請登入會員');
         return;
       }
 
       if (cartItems.length === 0) {
-        window.alert("尚未選購商品");
+        window.alert('尚未選購商品');
         return;
       }
 
       if (Object.values(recipient).some((value) => !value)) {
-        window.alert("請填寫完整訂購資料");
+        window.alert('請填寫完整訂購資料');
         setInvalidFields(
-          Object.keys(recipient).filter((key) => !recipient[key])
+          Object.keys(recipient).filter((key) => !recipient[key]),
         );
         formRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
+          behavior: 'smooth',
+          block: 'start',
         });
         return;
       }
 
       if (!tappay.canGetPrime()) {
-        window.alert("付款資料輸入有誤");
+        window.alert('付款資料輸入有誤');
         return;
       }
 
@@ -93,7 +93,7 @@ const CheckoutForm = () => {
         card: TappayCard;
       };
       if (result.status !== 0) {
-        window.alert("付款資料輸入有誤");
+        window.alert('付款資料輸入有誤');
         return;
       }
 
@@ -101,29 +101,29 @@ const CheckoutForm = () => {
         {
           prime: result.card.prime,
           order: {
-            shipping: "delivery",
-            payment: "credit_card",
+            shipping: 'delivery',
+            payment: 'credit_card',
             subtotal: cart.amount,
             freight: FREIGHT,
             total: cart.amount + FREIGHT,
             recipient: {
-              name: recipient["name"],
-              email: recipient["email"],
-              phone: recipient["phone"],
-              address: recipient["address"],
-              time: recipient["time"],
+              name: recipient['name'],
+              email: recipient['email'],
+              phone: recipient['phone'],
+              address: recipient['address'],
+              time: recipient['time'],
             },
             list: cartItems,
           },
         },
-        token
+        token,
       );
-      window.alert("付款成功");
+      window.alert('付款成功');
       const orderNumber = String(data.number);
       dispatch(cartActions.checkout(orderNumber));
-      router.push("/thankyou");
+      router.push('/thankyou');
     } catch (err) {
-      window.alert("結帳失敗請稍後再試");
+      window.alert('結帳失敗請稍後再試');
     } finally {
       setIsLoading(false);
     }
@@ -135,7 +135,7 @@ const CheckoutForm = () => {
       tappay.setupCard(
         cardNumberRef.current,
         cardExpirationDateRef.current,
-        cardCCVRef.current
+        cardCCVRef.current,
       );
     };
 
@@ -143,10 +143,10 @@ const CheckoutForm = () => {
   }, []);
 
   return (
-    <div className="w-full flex flex-col pb-[35px] xl:w-[1160px]">
+    <div className="flex w-full flex-col pb-[35px] xl:w-[1160px]">
       <form onSubmit={checkOutHandler} ref={formRef}>
-        <div className="w-full flex flex-col gap-[20px] mb-[24px] xl:gap-[30px]">
-          <div className="w-full text-[16px] leading-[19px] font-bold pb-[10px] mb-[20px] border-b border-light-black">
+        <div className="mb-[24px] flex w-full flex-col gap-[20px] xl:gap-[30px]">
+          <div className="mb-[20px] w-full border-b border-light-black pb-[10px] text-[16px] font-bold leading-[19px]">
             訂購資料
           </div>
           <div className={FORM_INPUT_WRAPPER_CLASS_NAME}>
@@ -158,13 +158,13 @@ const CheckoutForm = () => {
                 setRecipient({ ...recipient, name: e.target.value })
               }
               className={
-                invalidFields.some((item) => item === "name")
+                invalidFields.some((item) => item === 'name')
                   ? `${FORM_INPUT_CLASS_NAME} border-warning`
                   : FORM_INPUT_CLASS_NAME
               }
               id="recipient"
             />
-            <div className="text-[14px] leading-[17px] text-brown xl:w-[696px] xl:text-right xl:mt-[10px]">
+            <div className="text-[14px] leading-[17px] text-brown xl:mt-[10px] xl:w-[696px] xl:text-right">
               務必填寫完整收件人姓名，避免包裹無法順利簽收
             </div>
           </div>
@@ -177,7 +177,7 @@ const CheckoutForm = () => {
                 setRecipient({ ...recipient, phone: e.target.value })
               }
               className={
-                invalidFields.some((item) => item === "phone")
+                invalidFields.some((item) => item === 'phone')
                   ? `${FORM_INPUT_CLASS_NAME} border-warning`
                   : FORM_INPUT_CLASS_NAME
               }
@@ -193,7 +193,7 @@ const CheckoutForm = () => {
                 setRecipient({ ...recipient, address: e.target.value })
               }
               className={
-                invalidFields.some((item) => item === "address")
+                invalidFields.some((item) => item === 'address')
                   ? `${FORM_INPUT_CLASS_NAME} border-warning`
                   : FORM_INPUT_CLASS_NAME
               }
@@ -209,7 +209,7 @@ const CheckoutForm = () => {
                 setRecipient({ ...recipient, email: e.target.value })
               }
               className={
-                invalidFields.some((item) => item === "email")
+                invalidFields.some((item) => item === 'email')
                   ? `${FORM_INPUT_CLASS_NAME} border-warning`
                   : FORM_INPUT_CLASS_NAME
               }
@@ -218,14 +218,14 @@ const CheckoutForm = () => {
           </div>
           <div
             className={
-              invalidFields.some((item) => item === "time")
-                ? "flex flex-wrap gap-[10px] xl:flex-nowrap xl:items-center border rounded border-warning"
-                : "flex flex-wrap gap-[10px] xl:flex-nowrap xl:items-center"
+              invalidFields.some((item) => item === 'time')
+                ? 'flex flex-wrap gap-[10px] rounded border border-warning xl:flex-nowrap xl:items-center'
+                : 'flex flex-wrap gap-[10px] xl:flex-nowrap xl:items-center'
             }
           >
             <label
               htmlFor="deliverTime"
-              className="text-[14px] leading-[17px] text-light-black w-full xl:w-[120px] xl:text-[14px] xl:leading-[19px]"
+              className="w-full text-[14px] leading-[17px] text-light-black xl:w-[120px] xl:text-[14px] xl:leading-[19px]"
             >
               配送時間
             </label>
@@ -237,12 +237,12 @@ const CheckoutForm = () => {
                 type="radio"
                 onChange={(e) => {
                   if (e.target.checked)
-                    setRecipient({ ...recipient, time: "morning" });
+                    setRecipient({ ...recipient, time: 'morning' });
                 }}
               />
               <label
                 htmlFor="deliverTime-1"
-                className="text-[14px] leading-[26px] ml-[5px]"
+                className="ml-[5px] text-[14px] leading-[26px]"
               >
                 08:00-12:00
               </label>
@@ -255,12 +255,12 @@ const CheckoutForm = () => {
                 type="radio"
                 onChange={(e) => {
                   if (e.target.checked)
-                    setRecipient({ ...recipient, time: "afternoon" });
+                    setRecipient({ ...recipient, time: 'afternoon' });
                 }}
               />
               <label
                 htmlFor="deliverTime-2"
-                className="text-[14px] leading-[26px] ml-[5px]"
+                className="ml-[5px] text-[14px] leading-[26px]"
               >
                 14:00-18:00
               </label>
@@ -273,18 +273,18 @@ const CheckoutForm = () => {
                 type="radio"
                 onChange={(e) => {
                   if (e.target.checked)
-                    setRecipient({ ...recipient, time: "anytime" });
+                    setRecipient({ ...recipient, time: 'anytime' });
                 }}
               />
               <label
                 htmlFor="deliverTime-3"
-                className="text-[14px] leading-[26px] ml-[5px]"
+                className="ml-[5px] text-[14px] leading-[26px]"
               >
                 不指定
               </label>
             </div>
           </div>
-          <div className="w-full text-[16px] leading-[19px] font-bold pb-[10px] mb-[20px] border-b border-light-black">
+          <div className="mb-[20px] w-full border-b border-light-black pb-[10px] text-[16px] font-bold leading-[19px]">
             付款資料
           </div>
           <div className={FORM_INPUT_WRAPPER_CLASS_NAME}>
@@ -322,12 +322,12 @@ const CheckoutForm = () => {
           </div>
         </div>
         <CheckoutAmount freight={FREIGHT} />
-        <div className="xl:w-full xl:flex xl:justify-end">
+        <div className="xl:flex xl:w-full xl:justify-end">
           <button
-            className="bg-black text-white w-full h-[44px] text-center text-[16px] leading-[30px] xl:w-[240px]"
+            className="h-[44px] w-full bg-black text-center text-[16px] leading-[30px] text-white xl:w-[240px]"
             disabled={isLoading}
           >
-            {isLoading ? "付款處理中" : "確認付款"}
+            {isLoading ? '付款處理中' : '確認付款'}
           </button>
         </div>
       </form>

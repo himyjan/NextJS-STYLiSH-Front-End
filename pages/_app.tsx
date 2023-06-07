@@ -1,10 +1,10 @@
-import Layout from "@/components/Layout/Layout";
-import Head from "next/head";
-import "@/styles/globals.css";
-import type { AppProps } from "next/app";
-import { Provider } from "react-redux";
-import store from "@/store";
-import { AuthContextProvider } from "@/context/AuthContext";
+import Layout from '@/components/Layout/Layout';
+import Head from 'next/head';
+import '@/styles/globals.css';
+import type { AppProps } from 'next/app';
+import { Provider } from 'react-redux';
+import store from '@/store';
+import { AuthContextProvider } from '@/context/AuthContext';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

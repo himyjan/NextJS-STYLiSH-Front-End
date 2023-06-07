@@ -1,7 +1,7 @@
-import { Colors } from "@/types/types";
+import type { Colors } from '@/types/types';
 
 const SELECTED_COLOR_BOX =
-  "w-[36px] h-[36px] flex justify-center items-center ml-[15px] xl:ml-[32px]";
+  'w-[36px] h-[36px] flex justify-center items-center ml-[15px] xl:ml-[32px]';
 
 const ColorButton = ({
   color,
@@ -21,7 +21,7 @@ const ColorButton = ({
       }
     >
       <button
-        className="w-[24px] h-[24px] border border-light-grey xl:w-[26px] xl:h-[26px]"
+        className="h-[24px] w-[24px] border border-light-grey xl:h-[26px] xl:w-[26px]"
         style={{ backgroundColor: `#${color.code}` }}
         onClick={() => {
           selectColorHandler(color);
