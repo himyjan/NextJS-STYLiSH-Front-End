@@ -54,7 +54,7 @@ const Header = () => {
   return (
     <header className="w-screen sticky top-0 z-50 bg-white">
       <Script
-        src="https://js.tappaysdk.com/tpdirect/v5.13.1"
+        src="https://js.tappaysdk.com/sdk/tpdirect/v5.14.0"
         data-nscript="afterInteractive"
       ></Script>
       <div className="w-full xl:flex xl:h-[140px] xl:items-center xl:justify-start xl:border-b-[40px] xl:border-dark-grey xl:pl-[60px] xl:pr-[54px]">
