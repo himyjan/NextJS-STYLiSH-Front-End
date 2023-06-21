@@ -1,5 +1,5 @@
 const TAPPAY_SCRIPT_ID = 'tappay-sdk';
-const TAPPAY_SCRIPT_SRC = 'https://js.tappaysdk.com/tpdirect/v5.13.1';
+const TAPPAY_SCRIPT_SRC = 'https://js.tappaysdk.com/sdk/tpdirect/v5.14.0';
 
 // function insertTappayScript() {
 //   return new Promise((resolve) => {
