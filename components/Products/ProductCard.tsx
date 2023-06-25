@@ -6,7 +6,7 @@ const ProductCard = ({ data }: { data: ProductData }) => {
   return (
     <Link
       href={`/product/${data.id}`}
-      className="mx-[3px] w-[calc(50%-6px)] xl:mx-[20px] xl:mb-[50px] xl:w-[360px]"
+      className="mx-[3px] w-[calc(50%-6px)] xl:mx-[20px] xl:w-[360px]"
     >
       <Image
         width="0"
